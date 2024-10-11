@@ -105,7 +105,7 @@ class Dhcp4:
         if data.result == 3:
             return []
 
-        return [Reservation4.parse_obj(reservation) for reservation in data.arguments]
+        return [Reservation4.model_validate(reservation) for reservation in data.arguments]
 
     def cache_get_by_id(
         self, identifier_type: HostReservationIdentifierEnum, identifier: str
@@ -134,7 +134,7 @@ class Dhcp4:
         if data.result == 3:
             return []
 
-        return [Reservation4.parse_obj(reservation) for reservation in data.arguments]
+        return [Reservation4.model_validate(reservation) for reservation in data.arguments]
 
     def cache_insert(self, subnet_id: int, reservation: Reservation4) -> KeaResponse:
         """Manually insert a host into the cache
@@ -278,7 +278,7 @@ class Dhcp4:
             return None
 
         client_class = data.arguments["client-classes"][0]
-        return ClientClass4.parse_obj(client_class)
+        return ClientClass4.model_validate(client_class)
 
     def class_list(self) -> List[ClientClass4]:
         """Retrieves a list of all client classes from server configuration
@@ -291,7 +291,7 @@ class Dhcp4:
         )
 
         client_classes = data.arguments.get("client-classes")
-        return [ClientClass4.parse_obj(client_class) for client_class in client_classes]
+        return [ClientClass4.model_validate(client_class) for client_class in client_classes]
 
     def class_update(self, client_class: ClientClass4) -> KeaResponse:
         """Updates an existing client class in the server configuration
@@ -577,7 +577,7 @@ class Dhcp4:
         if data.result == 3:
             raise KeaLeaseNotFoundException(ip_address)
 
-        return Lease4.parse_obj(data.arguments)
+        return Lease4.model_validate(data.arguments)
 
     def lease4_get_all(self, subnets: List[int] = []) -> List[Lease4]:
         """Retrieves all IPv4 leases or all leases for the specified subnets
@@ -605,7 +605,7 @@ class Dhcp4:
         if data.result == 3:
             raise KeaLeaseNotFoundException(data.text)
 
-        leases = [Lease4.parse_obj(lease) for lease in data.arguments["leases"]]
+        leases = [Lease4.model_validate(lease) for lease in data.arguments["leases"]]
         return leases
 
     def lease4_get_by_client_id(self, client_id: str) -> Lease4:
@@ -629,7 +629,7 @@ class Dhcp4:
                 f"Unable to find a lease using client-id '{client_id}'"
             )
 
-        return Lease4.parse_obj(data.arguments)
+        return Lease4.model_validate(data.arguments)
 
     def lease4_get_by_hostname(self, hostname: str) -> KeaResponse:
         """Retrieves all IPv4 leases for the specified hostname
@@ -652,7 +652,7 @@ class Dhcp4:
                 f"Unable to find lease using hostname '{hostname}'"
             )
 
-        return Lease4.parse_obj(data.arguments)
+        return Lease4.model_validate(data.arguments)
 
     def lease4_get_by_hw_address(self, hw_address: str) -> Lease4:
         """Retrieves all IPv4 leases for the specified hardware address
@@ -676,7 +676,7 @@ class Dhcp4:
             )
 
         lease = data.arguments["leases"][0]
-        return Lease4.parse_obj(lease)
+        return Lease4.model_validate(lease)
 
     def lease4_get_page(self, limit: int, search_from: str) -> Lease4Page:
         """Retrieves all IPv4 leases by page
@@ -695,7 +695,7 @@ class Dhcp4:
             required_hook="lease_cmds",
         )
 
-        return Lease4Page.parse_obj(data.arguments)
+        return Lease4Page.model_validate(data.arguments)
 
     def lease4_resend_ddns(self, ip_address: str) -> KeaResponse:
         """Sends an internal request to the ddns daemon to update DNS for an existing lease
@@ -839,7 +839,7 @@ class Dhcp4:
             return None
 
         shared_network = data.arguments["shared-networks"][0]
-        return SharedNetwork4.parse_obj(shared_network)
+        return SharedNetwork4.model_validate(shared_network)
 
     def network4_list(self) -> List[SharedNetwork4]:
         """Returns a full list of the current shared networks configured
@@ -854,7 +854,7 @@ class Dhcp4:
         )
 
         networks = [
-            SharedNetwork4.parse_obj(network)
+            SharedNetwork4.model_validate(network)
             for network in data.arguments["shared-networks"]
         ]
         return networks
@@ -934,7 +934,7 @@ class Dhcp4:
             return None
 
         client_class = data.arguments["client-classes"][0]
-        return ClientClass4.parse_obj(client_class)
+        return ClientClass4.model_validate(client_class)
 
     def remote_class4_get_all(
         self, server_tags: List[str] = ["all"], remote_map: dict = {}
@@ -956,7 +956,7 @@ class Dhcp4:
         )
 
         client_classes = data.arguments.get("client-classes")
-        return [ClientClass4.parse_obj(client_class) for client_class in client_classes]
+        return [ClientClass4.model_validate(client_class) for client_class in client_classes]
 
     def remote_class4_set(
         self,
@@ -1487,7 +1487,7 @@ class Dhcp4:
             return None
 
         shared_network = data.arguments["shared-networks"][0]
-        return SharedNetwork4.parse_obj(shared_network)
+        return SharedNetwork4.model_validate(shared_network)
 
     def remote_network4_list(
         self, server_tags: List[str], remote_map: dict = {}
@@ -1509,7 +1509,7 @@ class Dhcp4:
         )
 
         shared_networks = [
-            SharedNetwork4.parse_obj(shared_network)
+            SharedNetwork4.model_validate(shared_network)
             for shared_network in data.arguments["shared-networks"]
         ]
         return shared_networks
@@ -1602,7 +1602,7 @@ class Dhcp4:
             return None
 
         remote_server = data.arguments["servers"][0]
-        return RemoteServer.parse_obj(remote_server)
+        return RemoteServer.model_validate(remote_server)
 
     def remote_server4_get_all(self, remote_map: dict = {}) -> KeaResponse:
         """Fetches all user-defined DHCPv4 servers from the database
@@ -1620,7 +1620,7 @@ class Dhcp4:
         )
 
         return [
-            RemoteServer.parse_obj(server) for server in data.arguments.get("servers")
+            RemoteServer.model_validate(server) for server in data.arguments.get("servers")
         ]
 
     def remote_server4_set(self, servers: List[RemoteServer], remote_map: dict = {}):
@@ -1707,7 +1707,7 @@ class Dhcp4:
             return None
 
         subnet = data.arguments["subnets"][0]
-        return Subnet4.parse_obj(subnet)
+        return Subnet4.model_validate(subnet)
 
     def remote_subnet4_get_by_prefix(
         self, prefix: str, remote_map: dict = {}
@@ -1735,7 +1735,7 @@ class Dhcp4:
             return None
 
         subnet = data.arguments["subnets"][0]
-        return Subnet4.parse_obj(subnet)
+        return Subnet4.model_validate(subnet)
 
     def remote_subnet4_list(
         self, server_tags: List[str], remote_map: dict = {}
@@ -1756,7 +1756,7 @@ class Dhcp4:
             remote_map=remote_map,
         )
 
-        subnets = [Subnet4.parse_obj(subnet) for subnet in data.arguments["subnets"]]
+        subnets = [Subnet4.model_validate(subnet) for subnet in data.arguments["subnets"]]
         return subnets
 
     def remote_subnet4_set(
@@ -1889,7 +1889,7 @@ class Dhcp4:
         if data.result == 3:
             raise KeaReservationNotFoundException(reservation_data=ip_address)
 
-        return Reservation4.parse_obj(data.arguments)
+        return Reservation4.model_validate(data.arguments)
 
     def reservation_get_by_identifier(
         self,
@@ -1928,7 +1928,7 @@ class Dhcp4:
                 reservation_data=f"({identifier_type}) {identifier}"
             )
 
-        return Reservation4.parse_obj(data.arguments)
+        return Reservation4.model_validate(data.arguments)
 
     def reservation_get_all(self, subnet_id: int) -> KeaResponse:
         """Gets all host reservations for a given subnet id
@@ -1947,7 +1947,7 @@ class Dhcp4:
         )
 
         return [
-            Reservation4.parse_obj(reservation)
+            Reservation4.model_validate(reservation)
             for reservation in reservations.arguments.get("hosts")
         ]
 
@@ -1978,7 +1978,7 @@ class Dhcp4:
         if not data.arguments.get("hosts"):
             return None
 
-        return Reservation4.parse_obj(data.arguments["hosts"][0])
+        return Reservation4.model_validate(data.arguments["hosts"][0])
 
     def reservation_get_page(
         self,
@@ -2017,7 +2017,7 @@ class Dhcp4:
             return None
 
         return [
-            Reservation4.parse_obj(reservation)
+            Reservation4.model_validate(reservation)
             for reservation in data.arguments["hosts"]
         ]
 
@@ -2091,7 +2091,7 @@ class Dhcp4:
             https://kea.readthedocs.io/en/kea-2.2.0/api.html#ref-status-get
         """
         data = self.api.send_command(command="status-get", service=self.service)
-        return StatusGet.parse_obj(data.arguments)
+        return StatusGet.model_validate(data.arguments)
 
     def subnet4_add(self, subnets: List[Subnet4]) -> KeaResponse:
         """Creates and adds a new subnet
@@ -2200,7 +2200,7 @@ class Dhcp4:
             return None
 
         subnet = data.arguments["subnet4"][0]
-        return Subnet4.parse_obj(subnet)
+        return Subnet4.model_validate(subnet)
 
     def subnet4_list(self) -> List[Subnet4]:
         """List all currently configured subnets
@@ -2214,7 +2214,7 @@ class Dhcp4:
             required_hook="subnet_cmds",
         )
 
-        subnets = [Subnet4.parse_obj(subnet) for subnet in data.arguments["subnets"]]
+        subnets = [Subnet4.model_validate(subnet) for subnet in data.arguments["subnets"]]
         return subnets
 
     def subnet4_update(self, subnets: List[Subnet4]) -> List[Subnet4]:

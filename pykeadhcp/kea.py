@@ -236,7 +236,7 @@ class Kea:
         # https://kea.readthedocs.io/en/kea-2.2.0/arm/hooks.html#command-structure
         if remote_map:
             try:
-                remote_map_parsed = RemoteMap.parse_obj(remote_map)
+                remote_map_parsed = RemoteMap.model_validate(remote_map)
             except ValidationError as err:
                 raise KeaInvalidRemoteMapException(str(err))
             except Exception as err:

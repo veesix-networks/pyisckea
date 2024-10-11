@@ -10,4 +10,4 @@ class CtrlAgentParser(GenericParser):
     """
 
     def __init__(self, config: dict):
-        self.config = CtrlAgentDaemonConfig.parse_obj(config["Control-agent"])
+        self.config = CtrlAgentDaemonConfig.model_validate(config["Control-agent"])

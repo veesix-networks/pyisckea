@@ -101,21 +101,21 @@ def read_local_config(filename: str):
 def ctrlagent_model(request: FixtureRequest):
     data = read_local_config(filename="tests/configs/ctrlagent_api_config.json")
     assert data["Control-agent"]
-    return CtrlAgentDaemonConfig.parse_obj(data["Control-agent"])
+    return CtrlAgentDaemonConfig.model_validate(data["Control-agent"])
 
 
 @pytest.fixture(scope="module")
 def dhcp4_model(request: FixtureRequest):
     data = read_local_config(filename="tests/configs/dhcp4_api_config.json")
     assert data["Dhcp4"]
-    return Dhcp4DaemonConfig.parse_obj(data["Dhcp4"])
+    return Dhcp4DaemonConfig.model_validate(data["Dhcp4"])
 
 
 @pytest.fixture(scope="module")
 def dhcp6_model(request: FixtureRequest):
     data = read_local_config(filename="tests/configs/dhcp6_api_config.json")
     assert data["Dhcp6"]
-    return Dhcp6DaemonConfig.parse_obj(data["Dhcp6"])
+    return Dhcp6DaemonConfig.model_validate(data["Dhcp6"])
 
 
 @pytest.fixture(scope="module")

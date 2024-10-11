@@ -19,7 +19,7 @@ class Dhcp4Parser(GenericParser):
     """
 
     def __init__(self, config: dict):
-        self.config = Dhcp4DaemonConfig.parse_obj(config["Dhcp4"])
+        self.config = Dhcp4DaemonConfig.model_validate(config["Dhcp4"])
 
     def get_shared_network(self, name: str) -> SharedNetwork4:
         """Returns a specific Dhcp4 shared-network

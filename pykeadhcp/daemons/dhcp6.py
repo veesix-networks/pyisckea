@@ -106,7 +106,7 @@ class Dhcp6:
         if data.result == 3:
             return []
 
-        return [Reservation6.parse_obj(reservation) for reservation in data.arguments]
+        return [Reservation6.model_validate(reservation) for reservation in data.arguments]
 
     def cache_get_by_id(
         self, identifier_type: HostReservationIdentifierEnum, identifier: str
@@ -135,7 +135,7 @@ class Dhcp6:
         if data.result == 3:
             return []
 
-        return [Reservation6.parse_obj(reservation) for reservation in data.arguments]
+        return [Reservation6.model_validate(reservation) for reservation in data.arguments]
 
     def cache_insert(self, subnet_id: int, reservation: Reservation6) -> KeaResponse:
         """Manually insert a host into the cache
@@ -279,7 +279,7 @@ class Dhcp6:
             return None
 
         client_class = data.arguments["client-classes"][0]
-        return ClientClass6.parse_obj(client_class)
+        return ClientClass6.model_validate(client_class)
 
     def class_list(self) -> List[ClientClass6]:
         """Retrieves a list of all client classes from server configuration
@@ -292,7 +292,7 @@ class Dhcp6:
         )
 
         client_classes = data.arguments.get("client-classes")
-        return [ClientClass6.parse_obj(client_class) for client_class in client_classes]
+        return [ClientClass6.model_validate(client_class) for client_class in client_classes]
 
     def class_update(self, client_class: ClientClass6) -> KeaResponse:
         """Updates an existing client class in the server configuration
@@ -582,7 +582,7 @@ class Dhcp6:
         if data.result == 3:
             raise KeaLeaseNotFoundException(ip_address)
 
-        return Lease6.parse_obj(data.arguments)
+        return Lease6.model_validate(data.arguments)
 
     def lease6_get_all(self, subnets: List[int] = []) -> List[Lease6]:
         """Retrieves all IPv6 leases or all leases for the specified subnets
@@ -610,7 +610,7 @@ class Dhcp6:
         if data.result == 3:
             raise KeaLeaseNotFoundException(data.text)
 
-        leases = [Lease6.parse_obj(lease) for lease in data.arguments["leases"]]
+        leases = [Lease6.model_validate(lease) for lease in data.arguments["leases"]]
         return leases
 
     def lease6_get_by_duid(self, duid: str) -> Lease6:
@@ -635,7 +635,7 @@ class Dhcp6:
             )
 
         lease = data.arguments["leases"][0]
-        return Lease6.parse_obj(lease)
+        return Lease6.model_validate(lease)
 
     def lease6_get_by_hostname(self, hostname: str) -> Lease6:
         """Retrieves all IPv6 leases for the specified hostname
@@ -659,7 +659,7 @@ class Dhcp6:
             )
 
         lease = data.arguments["leases"][0]
-        return Lease6.parse_obj(lease)
+        return Lease6.model_validate(lease)
 
     def lease6_get_page(self, limit: int, search_from: str) -> Lease6Page:
         """Retrieves all IPv6 leases by page
@@ -678,7 +678,7 @@ class Dhcp6:
             required_hook="lease_cmds",
         )
 
-        return Lease6Page.parse_obj(data.arguments)
+        return Lease6Page.model_validate(data.arguments)
 
     def lease6_resend_ddns(self, ip_address: str) -> KeaResponse:
         """Sends an internal request to the ddns daemon to update DNS for an existing lease
@@ -788,7 +788,7 @@ class Dhcp6:
             return None
 
         shared_network = data.arguments["shared-networks"][0]
-        return SharedNetwork6.parse_obj(shared_network)
+        return SharedNetwork6.model_validate(shared_network)
 
     def network6_list(self) -> List[SharedNetwork6]:
         """Returns a full list of the current shared networks configured
@@ -803,7 +803,7 @@ class Dhcp6:
         )
 
         networks = [
-            SharedNetwork6.parse_obj(network)
+            SharedNetwork6.model_validate(network)
             for network in data.arguments["shared-networks"]
         ]
         return networks
@@ -883,7 +883,7 @@ class Dhcp6:
             return None
 
         client_class = data.arguments["client-classes"][0]
-        return ClientClass6.parse_obj(client_class)
+        return ClientClass6.model_validate(client_class)
 
     def remote_class6_get_all(
         self, server_tags: List[str] = ["all"], remote_map: dict = {}
@@ -905,7 +905,7 @@ class Dhcp6:
         )
 
         client_classes = data.arguments.get("client-classes")
-        return [ClientClass6.parse_obj(client_class) for client_class in client_classes]
+        return [ClientClass6.model_validate(client_class) for client_class in client_classes]
 
     def remote_class6_set(
         self,
@@ -1498,7 +1498,7 @@ class Dhcp6:
             return None
 
         shared_network = data.arguments["shared-networks"][0]
-        return SharedNetwork6.parse_obj(shared_network)
+        return SharedNetwork6.model_validate(shared_network)
 
     def remote_network6_list(
         self, server_tags: List[str], remote_map: dict = {}
@@ -1520,7 +1520,7 @@ class Dhcp6:
         )
 
         shared_networks = [
-            SharedNetwork6.parse_obj(shared_network)
+            SharedNetwork6.model_validate(shared_network)
             for shared_network in data.arguments["shared-networks"]
         ]
         return shared_networks
@@ -1616,7 +1616,7 @@ class Dhcp6:
             return None
 
         remote_server = data.arguments["servers"][0]
-        return RemoteServer.parse_obj(remote_server)
+        return RemoteServer.model_validate(remote_server)
 
     def remote_server6_get_all(self, remote_map: dict = {}) -> KeaResponse:
         """Fetches all user-defined DHCPv6 servers from the database
@@ -1634,7 +1634,7 @@ class Dhcp6:
         )
 
         return [
-            RemoteServer.parse_obj(server) for server in data.arguments.get("servers")
+            RemoteServer.model_validate(server) for server in data.arguments.get("servers")
         ]
 
     def remote_server6_set(self, servers: List[RemoteServer], remote_map: dict = {}):
@@ -1721,7 +1721,7 @@ class Dhcp6:
             return None
 
         subnet = data.arguments["subnets"][0]
-        return Subnet6.parse_obj(subnet)
+        return Subnet6.model_validate(subnet)
 
     def remote_subnet6_get_by_prefix(
         self, prefix: str, remote_map: dict = {}
@@ -1749,7 +1749,7 @@ class Dhcp6:
             return None
 
         subnet = data.arguments["subnets"][0]
-        return Subnet6.parse_obj(subnet)
+        return Subnet6.model_validate(subnet)
 
     def remote_subnet6_list(
         self, server_tags: List[str], remote_map: dict = {}
@@ -1770,7 +1770,7 @@ class Dhcp6:
             remote_map=remote_map,
         )
 
-        subnets = [Subnet6.parse_obj(subnet) for subnet in data.arguments["subnets"]]
+        subnets = [Subnet6.model_validate(subnet) for subnet in data.arguments["subnets"]]
         return subnets
 
     def remote_subnet6_set(
@@ -1903,7 +1903,7 @@ class Dhcp6:
         if data.result == 3:
             raise KeaReservationNotFoundException(reservation_data=ip_address)
 
-        return Reservation6.parse_obj(data.arguments)
+        return Reservation6.model_validate(data.arguments)
 
     def reservation_get_by_identifier(
         self,
@@ -1942,7 +1942,7 @@ class Dhcp6:
                 reservation_data=f"({identifier_type}) {identifier}"
             )
 
-        return Reservation6.parse_obj(data.arguments)
+        return Reservation6.model_validate(data.arguments)
 
     def reservation_get_all(self, subnet_id: int) -> List[Reservation6]:
         """Gets all host reservations for a given subnet id
@@ -1961,7 +1961,7 @@ class Dhcp6:
         )
 
         return [
-            Reservation6.parse_obj(reservation)
+            Reservation6.model_validate(reservation)
             for reservation in reservations.arguments.get("hosts")
         ]
 
@@ -1992,7 +1992,7 @@ class Dhcp6:
         if not data.arguments.get("hosts"):
             return None
 
-        return Reservation6.parse_obj(data.arguments["hosts"][0])
+        return Reservation6.model_validate(data.arguments["hosts"][0])
 
     def reservation_get_page(
         self,
@@ -2031,7 +2031,7 @@ class Dhcp6:
             return None
 
         return [
-            Reservation6.parse_obj(reservation)
+            Reservation6.model_validate(reservation)
             for reservation in data.arguments["hosts"]
         ]
 
@@ -2075,7 +2075,7 @@ class Dhcp6:
             https://kea.readthedocs.io/en/kea-2.2.0/api.html#ref-status-get
         """
         data = self.api.send_command(command="status-get", service=self.service)
-        return StatusGet.parse_obj(data.arguments)
+        return StatusGet.model_validate(data.arguments)
 
     def subnet6_add(self, subnets: List[Subnet6]) -> KeaResponse:
         """Creates and adds a new subnet
@@ -2184,7 +2184,7 @@ class Dhcp6:
             return None
 
         subnet = data.arguments["subnet6"][0]
-        return Subnet6.parse_obj(subnet)
+        return Subnet6.model_validate(subnet)
 
     def subnet6_list(self) -> List[Subnet6]:
         """List all currently configured subnets
@@ -2198,7 +2198,7 @@ class Dhcp6:
             required_hook="subnet_cmds",
         )
 
-        subnets = [Subnet6.parse_obj(subnet) for subnet in data.arguments["subnets"]]
+        subnets = [Subnet6.model_validate(subnet) for subnet in data.arguments["subnets"]]
         return subnets
 
     def subnet6_update(self, subnets: List[Subnet6]) -> List[Subnet6]:
