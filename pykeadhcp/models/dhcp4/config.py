@@ -11,9 +11,9 @@ class Dhcp4DaemonConfig(CommonDhcpDaemonConfig):
     shared_networks: Optional[List[SharedNetwork4]] = []
     reservations: Optional[List[Reservation4]] = []
     subnet4: Optional[List[Subnet4]] = []
-    echo_client_id: Optional[bool]
-    match_client_id: Optional[bool]
-    authoritative: Optional[bool]
-    next_server: Optional[str]
-    server_hostname: Optional[str]
-    boot_file_name: Optional[str]
+    echo_client_id: Optional[bool] = None
+    match_client_id: Optional[bool] = None
+    authoritative: Optional[bool] = None
+    next_server: Optional[str] = None
+    server_hostname: Optional[str] = None
+    boot_file_name: Optional[str] = None

@@ -5,20 +5,20 @@ from pykeadhcp.models.enums import DatabaseTypeEnum, DatabaseOnFailEnum
 
 class Database(KeaBaseModel):
     type: DatabaseTypeEnum
-    user: Optional[str]
-    password: Optional[str]
-    host: Optional[str]
-    port: Optional[int]
-    name: Optional[str]
-    persist: Optional[bool]
-    lfc_interval: Optional[int]
-    readonly: Optional[bool]
-    connect_timeout: Optional[int]
-    max_reconnect_tries: Optional[int]
-    on_fail: Optional[DatabaseOnFailEnum]
-    max_row_errors: Optional[int]
-    trust_anchor: Optional[str]
-    cert_file: Optional[str]
-    key_file: Optional[str]
-    cipher_list: Optional[str]
-    unknown_map_entry: Optional[str]
+    user: Optional[str] = None
+    password: Optional[str] = None
+    host: Optional[str] = None
+    port: Optional[int] = None
+    name: Optional[str] = None
+    persist: Optional[bool] = None
+    lfc_interval: Optional[int] = None
+    readonly: Optional[bool] = None
+    connect_timeout: Optional[int] = None
+    max_reconnect_tries: Optional[int] = None
+    on_fail: Optional[DatabaseOnFailEnum] = None
+    max_row_errors: Optional[int] = None
+    trust_anchor: Optional[str] = None
+    cert_file: Optional[str] = None
+    key_file: Optional[str] = None
+    cipher_list: Optional[str] = None
+    unknown_map_entry: Optional[str] = None

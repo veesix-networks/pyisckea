@@ -4,10 +4,10 @@ from pykeadhcp.models.generic.option_data import OptionData
 
 
 class Reservation(KeaModel):
-    duid: Optional[str]
+    duid: Optional[str] = None
     client_classes: Optional[List[str]] = []
-    flex_id: Optional[str]
-    hw_address: Optional[str]
-    hostname: Optional[str]
+    flex_id: Optional[str] = None
+    hw_address: Optional[str] = None
+    hostname: Optional[str] = None
     option_data: Optional[List[OptionData]] = []
-    subnet_id: Optional[int]  # Used for reservation-add
+    subnet_id: Optional[int] = None  # Used for reservation-add

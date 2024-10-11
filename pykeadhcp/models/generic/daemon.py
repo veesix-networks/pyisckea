@@ -24,38 +24,38 @@ class CommonDaemonConfig(CommonDhcpConfig):
 
 class InterfaceListConfig(KeaBaseModel):
     interfaces: List[str] = []
-    dhcp_socket_type: Optional[DHCPSocketTypeEnum]
-    outbound_interface: Optional[OutboundInterfaceEnum]
-    re_detect: Optional[bool]
-    service_sockets_require_all: Optional[bool]
-    service_sockets_retry_wait_time: Optional[int]
-    service_sockets_max_retries: Optional[int]
+    dhcp_socket_type: Optional[DHCPSocketTypeEnum] = None
+    outbound_interface: Optional[OutboundInterfaceEnum] = None
+    re_detect: Optional[bool] = None
+    service_sockets_require_all: Optional[bool] = None
+    service_sockets_retry_wait_time: Optional[int] = None
+    service_sockets_max_retries: Optional[int] = None
 
 
 class CommonDhcpDaemonConfig(CommonDaemonConfig):
     interfaces_config: InterfaceListConfig
-    lease_database: Optional[Database]
-    hosts_database: Optional[Database]
-    hosts_databases: Optional[List[Database]]
+    lease_database: Optional[Database] = None
+    hosts_database: Optional[Database] = None
+    hosts_databases: Optional[List[Database]] = None
     host_reservation_identifiers: Optional[List[HostReservationIdentifierEnum]] = []
     option_def: Optional[List[OptionDef]] = []
-    expired_leases_processing: Optional[dict]
-    dhcp4o6_port: Optional[int]
-    control_socket: Optional[ControlSocket]
-    dhcp_queue_control: Optional[DHCPQueueControl]
-    dhcp_ddns: Optional[DhcpDdns]
-    sanity_checks: Optional[SanityCheck]
-    config_control: Optional[dict]
-    server_tag: Optional[str]
-    hostname_char_set: Optional[str]
-    hostname_char_replacement: Optional[str]
-    statistic_default_sample_count: Optional[int]
-    statistic_default_sample_age: Optional[int]
-    multi_threading: Optional[MultiThreading]
-    early_global_reservations_lookup: Optional[bool]
-    ip_reservations_unique: Optional[bool]
-    reservations_lookup_first: Optional[bool]
-    compatibility: Optional[dict]
-    parked_packet_limit: Optional[int]
-    decline_probation_period: Optional[int]
-    allocator: Optional[str]
+    expired_leases_processing: Optional[dict] = None
+    dhcp4o6_port: Optional[int] = None
+    control_socket: Optional[ControlSocket] = None
+    dhcp_queue_control: Optional[DHCPQueueControl] = None
+    dhcp_ddns: Optional[DhcpDdns] = None
+    sanity_checks: Optional[SanityCheck] = None
+    config_control: Optional[dict] = None
+    server_tag: Optional[str] = None
+    hostname_char_set: Optional[str] = None
+    hostname_char_replacement: Optional[str] = None
+    statistic_default_sample_count: Optional[int] = None
+    statistic_default_sample_age: Optional[int] = None
+    multi_threading: Optional[MultiThreading] = None
+    early_global_reservations_lookup: Optional[bool] = None
+    ip_reservations_unique: Optional[bool] = None
+    reservations_lookup_first: Optional[bool] = None
+    compatibility: Optional[dict] = None
+    parked_packet_limit: Optional[int] = None
+    decline_probation_period: Optional[int] = None
+    allocator: Optional[str] = None

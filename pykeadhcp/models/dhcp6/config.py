@@ -11,12 +11,12 @@ class Dhcp6DaemonConfig(CommonDhcpDaemonConfig):
     client_classes: Optional[List[ClientClass6]] = []
     shared_networks: Optional[List[SharedNetwork6]] = []
     reservations: Optional[List[Reservation6]] = []
-    data_directory: Optional[str]
-    preferred_lifetime: Optional[int]
-    min_preferred_lifetime: Optional[int]
-    max_preferred_lifetime: Optional[int]
+    data_directory: Optional[str] = None
+    preferred_lifetime: Optional[int] = None
+    min_preferred_lifetime: Optional[int] = None
+    max_preferred_lifetime: Optional[int] = None
     subnet6: Optional[List[Subnet6]] = []
     mac_sources: Optional[List[str]] = []
     relay_supplied_options: Optional[List[str]] = []
     server_id: ServerId
-    pd_allocator: Optional[str]
+    pd_allocator: Optional[str] = None

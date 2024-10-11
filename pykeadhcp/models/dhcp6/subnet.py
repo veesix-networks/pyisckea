@@ -5,10 +5,10 @@ from pykeadhcp.models.dhcp6.reservation import Reservation6
 
 
 class Subnet6(Subnet):
-    preferred_lifetime: Optional[int]
-    min_preferred_lifetime: Optional[int]
-    max_preferred_lifetime: Optional[int]
+    preferred_lifetime: Optional[int] = None
+    min_preferred_lifetime: Optional[int] = None
+    max_preferred_lifetime: Optional[int] = None
     pd_pools: Optional[List[PDPool]] = []
-    interface_id: Optional[str]
-    rapid_commit: Optional[bool]
+    interface_id: Optional[str] = None
+    rapid_commit: Optional[bool] = None
     reservations: Optional[List[Reservation6]] = []

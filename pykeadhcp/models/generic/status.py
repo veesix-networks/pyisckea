@@ -8,6 +8,6 @@ class StatusGet(KeaBaseModel):
     pid: int
     uptime: int
     reload: int
-    multi_threading_enabled: Optional[bool]
-    sockets: Optional[Sockets]
+    multi_threading_enabled: Optional[bool] = None
+    sockets: Optional[Sockets] = None
     high_availability: Optional[List[HighAvailability]] = []

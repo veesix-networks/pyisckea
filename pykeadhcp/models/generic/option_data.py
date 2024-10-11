@@ -4,8 +4,8 @@ from pykeadhcp.models.generic.base import KeaModel
 
 class OptionData(KeaModel):
     data: str
-    name: Optional[str]
-    code: Optional[int]
-    space: Optional[str]
-    csv_format: Optional[bool]
-    always_send: Optional[bool]
+    name: Optional[str] = None
+    code: Optional[int] = None
+    space: Optional[str] = None
+    csv_format: Optional[bool] = None
+    always_send: Optional[bool] = None

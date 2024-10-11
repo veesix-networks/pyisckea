@@ -6,7 +6,7 @@ from pykeadhcp.models.generic.relay import Relay
 class CommonDHCPParams(CommonDhcpConfig):
     """Any param shared between v4/v6 Shared Networks and Subnets"""
 
-    interface: Optional[str]
-    client_class: Optional[str]
+    interface: Optional[str] = None
+    client_class: Optional[str] = None
     require_client_classes: Optional[List[str]] = []
-    relay: Optional[Relay]
+    relay: Optional[Relay] = None

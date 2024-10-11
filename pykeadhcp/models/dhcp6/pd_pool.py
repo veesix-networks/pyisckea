@@ -8,7 +8,7 @@ class PDPool(KeaModel):
     prefix_len: int
     delegated_len: int
     option_data: Optional[List[OptionData]] = []
-    client_class: Optional[str]
+    client_class: Optional[str] = None
     require_client_classes: Optional[List[str]] = []
-    excluded_prefix: Optional[str]
-    excluded_prefix_len: Optional[int]
+    excluded_prefix: Optional[str] = None
+    excluded_prefix_len: Optional[int] = None

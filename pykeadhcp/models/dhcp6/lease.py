@@ -6,8 +6,8 @@ from pykeadhcp.models.enums import Lease6TypeEnum
 class Lease6(Lease):
     duid: str
     iaid: int
-    prefix_len: Optional[int]
-    type: Optional[Lease6TypeEnum]
+    prefix_len: Optional[int] = None
+    type: Optional[Lease6TypeEnum] = None
 
 
 class Lease6Page(LeasePage):
