@@ -1,4 +1,5 @@
 from typing import Optional, List
+from pydantic import Field
 from pykeadhcp.models.generic.config import CommonConfig
 from pykeadhcp.models.enums import AuthenticationTypeEnum
 
@@ -14,4 +15,4 @@ class Authentication(CommonConfig):
     type: AuthenticationTypeEnum
     realm: str
     directory: Optional[str] = None
-    clients: List[Optional[AuthenticationClient]] = []
+    clients: List[Optional[AuthenticationClient]] = Field(default_factory=list)

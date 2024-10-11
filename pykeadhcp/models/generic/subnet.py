@@ -7,7 +7,7 @@ from typing_extensions import Annotated
 
 class Subnet(CommonDHCPParams):
     id: Optional[Annotated[int, Field(gt=0, lt=4294967295)]] = None
-    pools: Optional[List[Pool]] = []
+    pools: Optional[List[Pool]] = Field(default_factory=list)
     subnet: str
     hostname_char_set: Optional[str] = None
     hostname_char_replacement: Optional[str] = None

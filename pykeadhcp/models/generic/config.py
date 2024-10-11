@@ -1,4 +1,5 @@
 from typing import Optional, List, Union
+from pydantic import Field
 from pykeadhcp.models.generic.base import KeaModel
 from pykeadhcp.models.generic.hook import Hook
 from pykeadhcp.models.generic.logger import Logger
@@ -16,7 +17,7 @@ class CommonDhcpConfig(CommonConfig):
     max_valid_lifetime: Optional[int] = None
     renew_timer: Optional[int] = None
     rebind_timer: Optional[int] = None
-    option_data: Optional[List[OptionData]] = []
+    option_data: Optional[List[OptionData]] = Field(default_factory=list)
     reservation_mode: Optional[ReservationMode] = None
     reservations_global: Optional[bool] = None
     reservations_in_subnet: Optional[bool] = None

@@ -1,4 +1,5 @@
 from typing import Optional, List, Union
+from pydantic import Field
 from pykeadhcp.models.generic.base import KeaBaseModel
 from pykeadhcp.models.generic.config import CommonDhcpConfig
 from pykeadhcp.models.generic.hook import Hook
@@ -18,12 +19,12 @@ from pykeadhcp.models.enums import (
 
 
 class CommonDaemonConfig(CommonDhcpConfig):
-    hooks_libraries: Optional[List[Hook]] = []
-    loggers: Optional[List[Logger]] = []
+    hooks_libraries: Optional[List[Hook]] = Field(default_factory=list)
+    loggers: Optional[List[Logger]] = Field(default_factory=list)
 
 
 class InterfaceListConfig(KeaBaseModel):
-    interfaces: List[str] = []
+    interfaces: List[str] = Field(default_factory=list)
     dhcp_socket_type: Optional[DHCPSocketTypeEnum] = None
     outbound_interface: Optional[OutboundInterfaceEnum] = None
     re_detect: Optional[bool] = None
@@ -37,8 +38,8 @@ class CommonDhcpDaemonConfig(CommonDaemonConfig):
     lease_database: Optional[Database] = None
     hosts_database: Optional[Database] = None
     hosts_databases: Optional[List[Database]] = None
-    host_reservation_identifiers: Optional[List[HostReservationIdentifierEnum]] = []
-    option_def: Optional[List[OptionDef]] = []
+    host_reservation_identifiers: Optional[List[HostReservationIdentifierEnum]] = Field(default_factory=list)
+    option_def: Optional[List[OptionDef]] = Field(default_factory=list)
     expired_leases_processing: Optional[dict] = None
     dhcp4o6_port: Optional[int] = None
     control_socket: Optional[ControlSocket] = None

@@ -1,4 +1,5 @@
 from typing import List, Optional
+from pydantic import Field
 from pykeadhcp.models.generic.lease import Lease, LeasePage
 
 
@@ -8,4 +9,4 @@ class Lease4(Lease):
 
 class Lease4Page(LeasePage):
     count: int
-    leases: Optional[List[Lease4]] = []
+    leases: Optional[List[Lease4]] = Field(default_factory=list)
