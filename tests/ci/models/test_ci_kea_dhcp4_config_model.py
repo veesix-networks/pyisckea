@@ -6,7 +6,7 @@ def test_ci_kea_dhcp4_config_model_load(dhcp4_model: Dhcp4DaemonConfig):
 
 
 def test_ci_kea_dhcp4_config_model_export(dhcp4_model: Dhcp4DaemonConfig):
-    assert dhcp4_model.dict(exclude_none=True, by_alias=True)
+    assert dhcp4_model.model_dump(exclude_none=True, by_alias=True)
 
 
 def test_ci_kea_dhcp4_config_model_hooks(dhcp4_model: Dhcp4DaemonConfig):

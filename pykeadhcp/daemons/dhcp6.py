@@ -152,7 +152,7 @@ class Dhcp6:
             arguments={
                 "subnet-id4": 0,
                 "subnet-id6": subnet_id,
-                **reservation.dict(
+                **reservation.model_dump(
                     exclude_none=True, exclude_unset=True, by_alias=True
                 ),
             },
@@ -232,7 +232,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "client-classes": [
-                    client_class.dict(
+                    client_class.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ]
@@ -305,7 +305,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "client-classes": [
-                    client_class.dict(
+                    client_class.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ]
@@ -539,7 +539,7 @@ class Dhcp6:
         return self.api.send_command_with_arguments(
             command="lease6-add",
             service=self.service,
-            arguments=lease.dict(exclude_none=True, exclude_unset=True, by_alias=True),
+            arguments=lease.model_dump(exclude_none=True, exclude_unset=True, by_alias=True),
             required_hook="lease_cmds",
         )
 
@@ -714,7 +714,7 @@ class Dhcp6:
         return self.api.send_command_with_arguments(
             command="lease6-update",
             service=self.service,
-            arguments=lease.dict(exclude_none=True, exclude_unset=True, by_alias=True),
+            arguments=lease.model_dump(exclude_none=True, exclude_unset=True, by_alias=True),
             required_hook="lease_cmds",
         )
 
@@ -742,7 +742,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "shared-networks": [
-                    network.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    network.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                     for network in shared_networks
                 ]
             },
@@ -924,7 +924,7 @@ class Dhcp6:
         Kea API Reference:
             https://kea.readthedocs.io/en/kea-2.2.0/api.html#remote-class6-set
         """
-        data = client_class.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+        data = client_class.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
         if follow_class_name:
             data["follow-class-name"] = follow_class_name
 
@@ -1108,7 +1108,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "option-defs": [
-                    option_def.dict(
+                    option_def.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ],
@@ -1217,7 +1217,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "options": [
-                    option_data.dict(
+                    option_data.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ],
@@ -1276,7 +1276,7 @@ class Dhcp6:
             arguments={
                 "shared-networks": [{"name": shared_network}],
                 "options": [
-                    option_data.dict(
+                    option_data.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ],
@@ -1338,7 +1338,7 @@ class Dhcp6:
             arguments={
                 "pd-pools": [{"prefix": prefix, "prefix-len": prefix_len}],
                 "options": [
-                    option_data.dict(
+                    option_data.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ],
@@ -1389,7 +1389,7 @@ class Dhcp6:
             arguments={
                 "pools": [{"pool": pool}],
                 "options": [
-                    option_data.dict(
+                    option_data.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ],
@@ -1437,7 +1437,7 @@ class Dhcp6:
             arguments={
                 "subnets": [{"id": subnet_id}],
                 "options": [
-                    option_data.dict(
+                    option_data.model_dump(
                         exclude_none=True, exclude_unset=True, by_alias=True
                     )
                 ],
@@ -1554,7 +1554,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "shared-networks": [
-                    network.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    network.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                     for network in shared_networks
                 ],
                 "server-tags": server_tags,
@@ -1579,7 +1579,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "servers": [
-                    server.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    server.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                 ]
                 for server in servers
             },
@@ -1603,7 +1603,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "servers": [
-                    server.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    server.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                 ]
             },
             remote_map=remote_map,
@@ -1653,7 +1653,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "servers": [
-                    server.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    server.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                 ]
                 for server in servers
             },
@@ -1791,7 +1791,7 @@ class Dhcp6:
             https://kea.readthedocs.io/en/kea-2.2.0/api.html#remote-subnet6-set
 
         """
-        data = subnet.dict(
+        data = subnet.model_dump(
             exclude_none=True,
             exclude_unset=True,
             by_alias=True,
@@ -1824,7 +1824,7 @@ class Dhcp6:
             command="reservation-add",
             service=self.service,
             arguments={
-                "reservation": reservation.dict(
+                "reservation": reservation.model_dump(
                     exclude_none=True, exclude_unset=True, by_alias=True
                 )
             },
@@ -2091,7 +2091,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                     for subnet in subnets
                 ]
             },
@@ -2133,7 +2133,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                     for subnet in subnets
                 ]
             },
@@ -2154,7 +2154,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                     for subnet in subnets
                 ]
             },
@@ -2215,7 +2215,7 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.dict(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
                     for subnet in subnets
                 ]
             },

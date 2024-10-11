@@ -6,7 +6,7 @@ def test_ci_kea_dhcp6_config_model_load(dhcp6_model: Dhcp6DaemonConfig):
 
 
 def test_ci_kea_dhcp6_config_model_export(dhcp6_model: Dhcp6DaemonConfig):
-    assert dhcp6_model.dict(exclude_none=True, by_alias=True)
+    assert dhcp6_model.model_dump(exclude_none=True, by_alias=True)
 
 
 def test_ci_kea_dhcp6_config_model_hooks(dhcp6_model: Dhcp6DaemonConfig):

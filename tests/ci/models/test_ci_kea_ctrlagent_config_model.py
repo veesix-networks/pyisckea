@@ -9,7 +9,7 @@ def test_ci_kea_ctrlagent_config_model_load(ctrlagent_model: CtrlAgentDaemonConf
 def test_ci_kea_ctrlagent_config_model_by_export(
     ctrlagent_model: CtrlAgentDaemonConfig,
 ):
-    assert ctrlagent_model.dict(exclude_none=True, by_alias=True)
+    assert ctrlagent_model.model_dump(exclude_none=True, by_alias=True)
 
 
 def test_ci_kea_ctrlagent_config_model_check_required(

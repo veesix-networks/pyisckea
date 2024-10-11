@@ -242,7 +242,7 @@ class Kea:
             except Exception as err:
                 raise KeaInvalidRemoteMapException(f"Generic Exception caught: {err}")
 
-            arguments["remote"] = remote_map_parsed.dict(
+            arguments["remote"] = remote_map_parsed.model_dump(
                 exclude_unset=True, exclude_none=True
             )
 
