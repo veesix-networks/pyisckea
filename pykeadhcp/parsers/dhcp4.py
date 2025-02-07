@@ -308,7 +308,7 @@ class Dhcp4Parser(GenericParser):
             identifier_data:    Data to match identifier type
         """
         identifier_type = identifier_type.value.replace("-", "_")
-        if not Reservation4.__fields__.get(
+        if not Reservation4.model_fields.get(
             identifier_type
         ):  # Is this the best way to check fields in Pydantic??
             raise exceptions.ParserInvalidHostReservationIdentifierError(
