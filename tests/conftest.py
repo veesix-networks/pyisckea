@@ -80,11 +80,11 @@ def kea_server(request: FixtureRequest):
         host=host,
         port=port,
         raise_generic_errors=raise_generic_errors,
-        verify=False
-        if disable_ssl_verify
-        else True
-        if not ssl_ca_bundle
-        else ssl_ca_bundle,
+        verify=(
+            False
+            if disable_ssl_verify
+            else True if not ssl_ca_bundle else ssl_ca_bundle
+        ),
     )
 
 

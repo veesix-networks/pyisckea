@@ -38,7 +38,9 @@ class CommonDhcpDaemonConfig(CommonDaemonConfig):
     lease_database: Optional[Database] = None
     hosts_database: Optional[Database] = None
     hosts_databases: Optional[List[Database]] = None
-    host_reservation_identifiers: Optional[List[HostReservationIdentifierEnum]] = Field(default_factory=list)
+    host_reservation_identifiers: Optional[List[HostReservationIdentifierEnum]] = Field(
+        default_factory=list
+    )
     option_def: Optional[List[OptionDef]] = Field(default_factory=list)
     expired_leases_processing: Optional[dict] = None
     dhcp4o6_port: Optional[int] = None

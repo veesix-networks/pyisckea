@@ -9,9 +9,11 @@ class Subnet4(Subnet):
     authoritative: Optional[bool] = None
     next_server: Optional[str] = None
     boot_file_name: Optional[str] = None
-    subnet_4o6_interface: Annotated[Optional[str], Field(alias='4o6-interface')] = None
-    subnet_4o6_interface_id: Annotated[Optional[str], Field(alias='4o6-interface-id')] = None
-    subnet_4o6_subnet: Annotated[Optional[str], Field(alias='4o6-subnet')] = None
+    subnet_4o6_interface: Annotated[Optional[str], Field(alias="4o6-interface")] = None
+    subnet_4o6_interface_id: Annotated[
+        Optional[str], Field(alias="4o6-interface-id")
+    ] = None
+    subnet_4o6_subnet: Annotated[Optional[str], Field(alias="4o6-subnet")] = None
     reservations: Optional[List[Reservation4]] = Field(default_factory=list)
 
     model_config = ConfigDict(populate_by_name=True)

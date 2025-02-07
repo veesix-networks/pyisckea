@@ -106,7 +106,9 @@ class Dhcp6:
         if data.result == 3:
             return []
 
-        return [Reservation6.model_validate(reservation) for reservation in data.arguments]
+        return [
+            Reservation6.model_validate(reservation) for reservation in data.arguments
+        ]
 
     def cache_get_by_id(
         self, identifier_type: HostReservationIdentifierEnum, identifier: str
@@ -135,7 +137,9 @@ class Dhcp6:
         if data.result == 3:
             return []
 
-        return [Reservation6.model_validate(reservation) for reservation in data.arguments]
+        return [
+            Reservation6.model_validate(reservation) for reservation in data.arguments
+        ]
 
     def cache_insert(self, subnet_id: int, reservation: Reservation6) -> KeaResponse:
         """Manually insert a host into the cache
@@ -292,7 +296,9 @@ class Dhcp6:
         )
 
         client_classes = data.arguments.get("client-classes")
-        return [ClientClass6.model_validate(client_class) for client_class in client_classes]
+        return [
+            ClientClass6.model_validate(client_class) for client_class in client_classes
+        ]
 
     def class_update(self, client_class: ClientClass6) -> KeaResponse:
         """Updates an existing client class in the server configuration
@@ -539,7 +545,9 @@ class Dhcp6:
         return self.api.send_command_with_arguments(
             command="lease6-add",
             service=self.service,
-            arguments=lease.model_dump(exclude_none=True, exclude_unset=True, by_alias=True),
+            arguments=lease.model_dump(
+                exclude_none=True, exclude_unset=True, by_alias=True
+            ),
             required_hook="lease_cmds",
         )
 
@@ -714,7 +722,9 @@ class Dhcp6:
         return self.api.send_command_with_arguments(
             command="lease6-update",
             service=self.service,
-            arguments=lease.model_dump(exclude_none=True, exclude_unset=True, by_alias=True),
+            arguments=lease.model_dump(
+                exclude_none=True, exclude_unset=True, by_alias=True
+            ),
             required_hook="lease_cmds",
         )
 
@@ -742,7 +752,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "shared-networks": [
-                    network.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    network.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                     for network in shared_networks
                 ]
             },
@@ -905,7 +917,9 @@ class Dhcp6:
         )
 
         client_classes = data.arguments.get("client-classes")
-        return [ClientClass6.model_validate(client_class) for client_class in client_classes]
+        return [
+            ClientClass6.model_validate(client_class) for client_class in client_classes
+        ]
 
     def remote_class6_set(
         self,
@@ -924,7 +938,9 @@ class Dhcp6:
         Kea API Reference:
             https://kea.readthedocs.io/en/kea-2.2.0/api.html#remote-class6-set
         """
-        data = client_class.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+        data = client_class.model_dump(
+            exclude_none=True, exclude_unset=True, by_alias=True
+        )
         if follow_class_name:
             data["follow-class-name"] = follow_class_name
 
@@ -1554,7 +1570,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "shared-networks": [
-                    network.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    network.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                     for network in shared_networks
                 ],
                 "server-tags": server_tags,
@@ -1579,7 +1597,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "servers": [
-                    server.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    server.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                 ]
                 for server in servers
             },
@@ -1603,7 +1623,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "servers": [
-                    server.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    server.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                 ]
             },
             remote_map=remote_map,
@@ -1634,7 +1656,8 @@ class Dhcp6:
         )
 
         return [
-            RemoteServer.model_validate(server) for server in data.arguments.get("servers")
+            RemoteServer.model_validate(server)
+            for server in data.arguments.get("servers")
         ]
 
     def remote_server6_set(self, servers: List[RemoteServer], remote_map: dict = {}):
@@ -1653,7 +1676,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "servers": [
-                    server.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    server.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                 ]
                 for server in servers
             },
@@ -1770,7 +1795,9 @@ class Dhcp6:
             remote_map=remote_map,
         )
 
-        subnets = [Subnet6.model_validate(subnet) for subnet in data.arguments["subnets"]]
+        subnets = [
+            Subnet6.model_validate(subnet) for subnet in data.arguments["subnets"]
+        ]
         return subnets
 
     def remote_subnet6_set(
@@ -2091,7 +2118,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                     for subnet in subnets
                 ]
             },
@@ -2133,7 +2162,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                     for subnet in subnets
                 ]
             },
@@ -2154,7 +2185,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                     for subnet in subnets
                 ]
             },
@@ -2198,7 +2231,9 @@ class Dhcp6:
             required_hook="subnet_cmds",
         )
 
-        subnets = [Subnet6.model_validate(subnet) for subnet in data.arguments["subnets"]]
+        subnets = [
+            Subnet6.model_validate(subnet) for subnet in data.arguments["subnets"]
+        ]
         return subnets
 
     def subnet6_update(self, subnets: List[Subnet6]) -> List[Subnet6]:
@@ -2215,7 +2250,9 @@ class Dhcp6:
             service=self.service,
             arguments={
                 "subnet6": [
-                    subnet.model_dump(exclude_none=True, exclude_unset=True, by_alias=True)
+                    subnet.model_dump(
+                        exclude_none=True, exclude_unset=True, by_alias=True
+                    )
                     for subnet in subnets
                 ]
             },
