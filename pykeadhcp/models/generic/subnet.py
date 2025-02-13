@@ -12,3 +12,4 @@ class Subnet(CommonDHCPParams):
     subnet: str
     hostname_char_set: Optional[str] = None
     hostname_char_replacement: Optional[str] = None
+    allocator: Optional[str] = None

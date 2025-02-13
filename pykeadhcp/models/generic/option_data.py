@@ -9,3 +9,4 @@ class OptionData(KeaModel):
     space: Optional[str] = None
     csv_format: Optional[bool] = None
     always_send: Optional[bool] = None
+    never_send: Optional[bool] = None

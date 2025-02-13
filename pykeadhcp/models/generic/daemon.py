@@ -15,6 +15,7 @@ from pykeadhcp.models.enums import (
     DHCPSocketTypeEnum,
     OutboundInterfaceEnum,
     HostReservationIdentifierEnum,
+    DDNSConflictResolutionModeEnum
 )
 
 
@@ -45,6 +46,9 @@ class CommonDhcpDaemonConfig(CommonDaemonConfig):
     expired_leases_processing: Optional[dict] = None
     dhcp4o6_port: Optional[int] = None
     control_socket: Optional[ControlSocket] = None
+    ddns_conflict_resolution_mode: Optional[DDNSConflictResolutionModeEnum] = (
+        DDNSConflictResolutionModeEnum.check_with_dhcid
+    )
     dhcp_queue_control: Optional[DHCPQueueControl] = None
     dhcp_ddns: Optional[DhcpDdns] = None
     sanity_checks: Optional[SanityCheck] = None

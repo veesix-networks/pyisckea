@@ -18,3 +18,4 @@ class Dhcp4DaemonConfig(CommonDhcpDaemonConfig):
     next_server: Optional[str] = None
     server_hostname: Optional[str] = None
     boot_file_name: Optional[str] = None
+    stash_agent_options: Optional[bool] = None

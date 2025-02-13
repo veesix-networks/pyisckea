@@ -9,6 +9,7 @@ class Subnet6(Subnet):
     preferred_lifetime: Optional[int] = None
     min_preferred_lifetime: Optional[int] = None
     max_preferred_lifetime: Optional[int] = None
+    pd_allocator: Optional[str] = None
     pd_pools: Optional[List[PDPool]] = Field(default_factory=list)
     interface_id: Optional[str] = None
     rapid_commit: Optional[bool] = None
