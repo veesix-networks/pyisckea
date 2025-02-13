@@ -463,6 +463,7 @@ class Dhcp4:
         return self.api.send_command(
             command="ha-maintenance-cancel", service=self.service, required_hook="ha"
         )
+
     def ha_maintenance_cancel(self) -> KeaResponse:
         """Cancel maintenance via API
 
@@ -489,6 +490,7 @@ class Dhcp4:
             arguments={"cancel": cancel},
             required_hook="ha",
         )
+
     def ha_maintenance_notify(self, cancel: bool) -> KeaResponse:
         """Typically used by servers and not an administrator, however this informs the partner HA
         servers to transition to the in-maintenance state or revert from it
@@ -557,6 +559,7 @@ class Dhcp4:
             arguments={"scopes": ha_servers},
             required_hook="ha",
         )
+
     def ha_scopes(self, ha_servers: List[str]) -> KeaResponse:
         """Modifies the scope that the server is responsible for serving
 
@@ -589,6 +592,7 @@ class Dhcp4:
             arguments={"server-name": partner_server, "max-period": max_period},
             required_hook="ha",
         )
+
     def ha_sync(self, partner_server: str, max_period: int) -> KeaResponse:
         """Instructs the server to sync its local lease database with a selected partner server
 
