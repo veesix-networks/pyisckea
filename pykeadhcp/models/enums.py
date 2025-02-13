@@ -115,6 +115,7 @@ class HAStateTypeEnum(str, Enum):
     unavailable = "unavailable"
     null = ""
 
+
 class DDNSConflictResolutionModeEnum(str, Enum):
     check_with_dhcid = "check-with-dhcid"
     no_check_with_dhcid = "no-check-with-dhcid"

@@ -15,7 +15,7 @@ from pykeadhcp.models.enums import (
     DHCPSocketTypeEnum,
     OutboundInterfaceEnum,
     HostReservationIdentifierEnum,
-    DDNSConflictResolutionModeEnum
+    DDNSConflictResolutionModeEnum,
 )
 
 
