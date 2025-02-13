@@ -10,7 +10,7 @@ def test_kea_dhcp6_parser_parse_config(kea_server: Kea):
     assert parsed.config.interfaces_config
     assert parsed.config.control_socket
     assert json.dumps(
-        parsed.config.dict(exclude_none=True, by_alias=True),
+        parsed.config.model_dump(exclude_none=True, by_alias=True),
         indent=4,
         sort_keys=True,
     )
@@ -20,7 +20,7 @@ def test_kea_dhcp6_parser_config_test(kea_server: Kea):
     cached_config = kea_server.dhcp6.cached_config
     parsed = Dhcp6Parser(config=cached_config)
     config_to_test = {
-        "Dhcp6": parsed.config.dict(
+        "Dhcp6": parsed.config.model_dump(
             exclude_none=True, exclude_unset=True, by_alias=True
         )
     }

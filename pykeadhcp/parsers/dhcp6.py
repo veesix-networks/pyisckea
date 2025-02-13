@@ -20,7 +20,7 @@ class Dhcp6Parser(GenericParser):
     """
 
     def __init__(self, config: dict):
-        self.config = Dhcp6DaemonConfig.parse_obj(config["Dhcp6"])
+        self.config = Dhcp6DaemonConfig.model_validate(config["Dhcp6"])
 
     def get_shared_network(self, name: str) -> SharedNetwork6:
         """Returns a specific Dhcp6 shared-network
@@ -312,7 +312,7 @@ class Dhcp6Parser(GenericParser):
             identifier_data:    Data to match identifier type
         """
         identifier_type = identifier_type.value.replace("-", "_")
-        if not Reservation6.__fields__.get(
+        if not Reservation6.model_fields.get(
             identifier_type
         ):  # Is this the best way to check fields in Pydantic??
             raise exceptions.ParserInvalidHostReservationIdentifierError(

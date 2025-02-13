@@ -1,11 +1,11 @@
-ARG KEA_REPO=public/isc/kea-2-2
-ARG KEA_VERSION=2.2.0-isc20220726061131
+ARG KEA_REPO=public/isc/kea-2-6
+ARG KEA_VERSION=2.6.1-isc20240725093407
 # Indicate if the premium packages should be installed.
 # Valid values: "premium" or empty.
 ARG KEA_PREMIUM=""
 
 
-FROM debian:10.13-slim AS debian-base
+FROM debian:12.9-slim AS debian-base
 
 # Container with a modern Supervisord installled.
 FROM debian-base AS supervisor-base
@@ -13,13 +13,13 @@ RUN apt-get update \
         && apt-get install \
         -y \
         --no-install-recommends \
-        python3.7=3.7.* \
-        python3-pip=18.* \
-        python3-setuptools=40.8.* \
+        python3.11=3.11.* \
+        python3-pip=23.* \
+        python3-setuptools=66.* \
+        supervisor \
         wget \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
-        && python3.7 -m pip install --no-cache-dir supervisor==4.2 \
         && mkdir -p /var/log/supervisor
 
 # Server containers
@@ -35,8 +35,8 @@ RUN apt-get update \
         && apt-get install \
         -y \
         --no-install-recommends \
-        curl=7.64.* \
-        apt-transport-https=1.8.* \
+        curl=7.88.* \
+        apt-transport-https=2.6.* \
         gnupg=2.2.* \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*

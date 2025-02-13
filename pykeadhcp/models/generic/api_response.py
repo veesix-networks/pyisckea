@@ -4,5 +4,5 @@ from pydantic import BaseModel
 
 class KeaResponse(BaseModel):
     result: int
-    text: Optional[str]
-    arguments: Optional[Union[dict, list]]
+    text: Optional[str] = None
+    arguments: Optional[Union[dict, list]] = None

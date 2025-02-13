@@ -31,8 +31,8 @@ services:
       - "8080:8080" # Supervisor API Access
       - "8000:8000" # Ctrl Agent Daemon
     environment:
-      KEA_VERSION: "2.2.0-isc20220726061131"
-      KEA_REPO: "public/isc/kea-2-2"
+      KEA_VERSION: "2.6.1-isc20240725093407"
+      KEA_REPO: "public/isc/kea-2-6"
       KEA_PREMIUM: ""
     env_file:
       - .env
