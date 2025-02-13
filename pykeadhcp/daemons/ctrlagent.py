@@ -123,4 +123,4 @@ class CtrlAgent:
             https://kea.readthedocs.io/en/kea-2.2.0/api.html#ref-status-get
         """
         data = self.api.send_command(command="status-get", service=self.service)
-        return StatusGet.parse_obj(data.arguments)
+        return StatusGet.model_validate(data.arguments)

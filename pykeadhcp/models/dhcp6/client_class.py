@@ -3,6 +3,6 @@ from pykeadhcp.models.generic.client_class import ClientClass
 
 
 class ClientClass6(ClientClass):
-    preferred_lifetime: Optional[int]
-    min_preferred_lifetime: Optional[int]
-    max_preferred_lifetime: Optional[int]
+    preferred_lifetime: Optional[int] = None
+    min_preferred_lifetime: Optional[int] = None
+    max_preferred_lifetime: Optional[int] = None

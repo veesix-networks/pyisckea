@@ -9,7 +9,7 @@ class ControlSocket(CommonConfig):
 
 
 class ControlSockets(KeaBaseModel):
-    dhcp4: Optional[ControlSocket]
-    dhcp6: Optional[ControlSocket]
-    d2: Optional[ControlSocket]
-    unknown_map_entry: Optional[str]
+    dhcp4: Optional[ControlSocket] = None
+    dhcp6: Optional[ControlSocket] = None
+    d2: Optional[ControlSocket] = None
+    unknown_map_entry: Optional[str] = None

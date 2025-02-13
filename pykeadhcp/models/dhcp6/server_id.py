@@ -6,7 +6,7 @@ from pykeadhcp.models.enums import ServerIdTypeEnum
 class ServerId(CommonConfig):
     type: ServerIdTypeEnum
     htype: int
-    identifier: Optional[str]
+    identifier: Optional[str] = None
     time: int
     enterprise_id: int
     persist: bool

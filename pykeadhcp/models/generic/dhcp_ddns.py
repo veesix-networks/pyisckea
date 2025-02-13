@@ -12,13 +12,13 @@ class DhcpDdns(CommonConfig):
     max_queue_size: int
     ncr_protocol: NCRProtocolEnum
     ncr_format: NCRFormatEnum
-    dep_override_no_update: Optional[bool]
-    dep_override_client_update: Optional[bool]
-    dep_replace_client_name: Optional[str]
-    dep_generated_prefix: Optional[str]
-    dep_qualifying_suffix: Optional[str]
-    dep_hostname_char_set: Optional[str]
-    dep_hostname_char_replacement: Optional[str]
+    dep_override_no_update: Optional[bool] = None
+    dep_override_client_update: Optional[bool] = None
+    dep_replace_client_name: Optional[str] = None
+    dep_generated_prefix: Optional[str] = None
+    dep_qualifying_suffix: Optional[str] = None
+    dep_hostname_char_set: Optional[str] = None
+    dep_hostname_char_replacement: Optional[str] = None
 
 
 """

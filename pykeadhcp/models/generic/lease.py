@@ -3,15 +3,15 @@ from pykeadhcp.models.generic.base import KeaBaseModel
 
 
 class Lease(KeaBaseModel):
-    cltt: Optional[int]
-    fqdn_fwd: Optional[bool]
-    fqdn_rev: Optional[bool]
-    hostname: Optional[str]
-    hw_address: Optional[str]
+    cltt: Optional[int] = None
+    fqdn_fwd: Optional[bool] = None
+    fqdn_rev: Optional[bool] = None
+    hostname: Optional[str] = None
+    hw_address: Optional[str] = None
     ip_address: str
-    state: Optional[int]
-    subnet_id: Optional[int]
-    valid_lft: Optional[int]
+    state: Optional[int] = None
+    subnet_id: Optional[int] = None
+    valid_lft: Optional[int] = None
 
 
 class LeasePage(KeaBaseModel):

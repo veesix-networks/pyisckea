@@ -10,7 +10,7 @@ def test_kea_ctrlagent_parser_parse_config(kea_server: Kea):
     assert parsed.config.http_host
     assert parsed.config.http_port
     assert json.dumps(
-        parsed.config.dict(exclude_none=True, by_alias=True),
+        parsed.config.model_dump(exclude_none=True, by_alias=True),
         indent=4,
         sort_keys=True,
     )
@@ -20,7 +20,7 @@ def test_kea_ctrlagent_parser_config_test(kea_server: Kea):
     cached_config = kea_server.ctrlagent.cached_config
     parsed = CtrlAgentParser(config=cached_config)
     config_to_test = {
-        "Control-agent": parsed.config.dict(
+        "Control-agent": parsed.config.model_dump(
             exclude_none=True, exclude_unset=True, by_alias=True
         )
     }

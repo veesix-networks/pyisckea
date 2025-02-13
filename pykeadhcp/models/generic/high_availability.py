@@ -13,7 +13,7 @@ class HAServerRemote(KeaBaseModel):
     age: int
     in_touch: bool
     last_scopes: List[str]
-    last_state: Union[None, HAStateTypeEnum]
+    last_state: Union[None, HAStateTypeEnum] = None
     role: HARoleTypeEnum
 
 

@@ -3,9 +3,9 @@ from pykeadhcp.models.generic.reservation import Reservation
 
 
 class Reservation4(Reservation):
-    client_id: Optional[str]
-    circuit_id: Optional[str]
+    client_id: Optional[str] = None
+    circuit_id: Optional[str] = None
     ip_address: str
-    next_server: Optional[str]
-    server_hostname: Optional[str]
-    boot_file_name: Optional[str]
+    next_server: Optional[str] = None
+    server_hostname: Optional[str] = None
+    boot_file_name: Optional[str] = None
