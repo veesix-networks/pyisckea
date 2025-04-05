@@ -1,0 +1,58 @@
+site_name: veesix ::networks - pykeadhcp
+site_url: https://docs.pykeadhcp.veesix-networks.co.uk
+repo_url: https://github.com/veesix-networks/pykeadhcp
+repo_name: veesix-networks/pykeadhcp
+logo: docs/img/logo.png
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: custom
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: custom
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: custom
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+extra_css:
+  - stylesheets/extra.css
+nav:
+  - Get Started: 
+    - Intro: index.md
+  - Author: https://github.com/veesix-networks
+markdown_extensions:
+  - tables
+  - admonition
+  - def_list
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
