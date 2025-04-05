@@ -1,5 +1,5 @@
-ARG KEA_REPO=public/isc/kea-2-6
-ARG KEA_VERSION=2.6.1-isc20240725093407
+ARG KEA_REPO=public/isc/kea-dev
+ARG KEA_VERSION=2.7.7-isc20250326114722
 # Indicate if the premium packages should be installed.
 # Valid values: "premium" or empty.
 ARG KEA_PREMIUM=""
@@ -74,15 +74,7 @@ RUN [ "${KEA_PREMIUM}" != "premium" ] || ( \
         && apt-get install \
         --no-install-recommends \
         -y \
-        isc-kea-premium-host-cmds=${KEA_VERSION} \
-        isc-kea-premium-forensic-log=${KEA_VERSION} \
-        isc-kea-premium-host-cache=${KEA_VERSION} \
-        isc-kea-premium-radius=${KEA_VERSION} \
-        isc-kea-premium-flex-id=${KEA_VERSION} \
-        isc-kea-premium-subnet-cmds=${KEA_VERSION} \
-        isc-kea-premium-host-cmds=${KEA_VERSION} \
         isc-kea-premium-cb-cmds=${KEA_VERSION} \
-        isc-kea-premium-class-cmds=${KEA_VERSION} \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
         && mkdir -p /var/run/kea/ \
