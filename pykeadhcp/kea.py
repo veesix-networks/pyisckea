@@ -1,6 +1,4 @@
-import requests
-from requests.auth import HTTPBasicAuth
-from requests.exceptions import HTTPError
+from httpx import Client, BasicAuth
 from pathlib import Path
 from typing import List, Union
 from pydantic import ValidationError
@@ -28,9 +26,7 @@ class Kea:
         ip:                     IP address of the Kea server
         port:                   TCP Port of the Kea Server to access the API
         headers:                Headers to inject in every POST request sent to the API
-        use_basic_auth:         Use HTTP Basic Auth if Kea is configured for it
-        username:               Username for HTTP Basic Auth
-        password:               Password for HTTP Basic Auth
+        auth:                   Use HTTP Basic Auth if Kea is configured for it
         raise_generic_errors:   If True, it will raise a generic error based on Kea Documentation
             (as per self.RESPONSE_CODES). Set this to False if you want to catch the API endpoint specific
             errors such as `v4 Shared Network not found` vs `Code 3: the requested operation has been completed but the requested resource was not found.
@@ -43,18 +39,15 @@ class Kea:
         self,
         host: str,
         port: int,
-        headers: dict = {"Content-Type": "application/json"},
-        use_basic_auth: bool = False,
-        username: str = "",
-        password: str = "",
+        auth: BasicAuth = None,
+        client: Client = Client(),
         raise_generic_errors: bool = False,
         verify: Union[bool, str] = True,
     ):
         self.host = host
         self.port = port
-        self.headers = headers
-        self.use_basic_auth = use_basic_auth
-        self.basic_auth = HTTPBasicAuth(username, password)
+        self.auth = auth
+        self.client = client
         self.services = ["dhcp4", "dhcp6", "ddns", None]  # None = Control-Agent Daemon
         self.url = f"{self.host}:{self.port}"
         self.raise_generic_errors = raise_generic_errors
@@ -70,6 +63,10 @@ class Kea:
         self.ddns = Ddns(self)
         self.dhcp4 = Dhcp4(self)
         self.dhcp6 = Dhcp6(self)
+
+        self.client.base_url = self.url
+        if self.auth:
+            self.client.auth = self.auth
 
     def get_active_hooks(self, hooks: List[dict]) -> List[Hook]:
         """Returns a list of Hook objects
@@ -123,13 +120,9 @@ class Kea:
             endpoint:       API Endpoint
             body:           JSON body to send
         """
-        url = self.url + endpoint
-        response = requests.post(
-            url=url,
+        response = self.client.post(
+            url=endpoint,
             json=body,
-            headers=self.headers,
-            auth=self.basic_auth if self.use_basic_auth else None,
-            verify=self.verify,
             **kwargs,
         )
 
