@@ -57,6 +57,7 @@ RUN curl https://dl.cloudsmith.io/${KEA_REPO}/setup.deb.sh | bash \
         isc-kea-admin=${KEA_VERSION} \
         isc-kea-common=${KEA_VERSION} \
         isc-kea-hooks=${KEA_VERSION} \
+        isc-kea-mysql=${KEA_VERSION} \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
         && mkdir -p /var/run/kea/

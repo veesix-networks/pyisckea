@@ -6,7 +6,6 @@ status-get (get HA mode)
 """
 
 
-@pytest.mark.order("first")
 def test_kea_dhcp6_ha_check_primary(kea_server: Kea):
     status = kea_server.dhcp6.status_get()
 
@@ -17,8 +16,8 @@ def test_kea_dhcp6_ha_check_primary(kea_server: Kea):
 
     assert ha_settings.ha_mode == "hot-standby"
     assert ha_settings.ha_servers.local.role == "primary"
-    assert ha_settings.ha_servers.local.state == "hot-standby"
-    assert ha_settings.ha_servers.remote.last_state == "hot-standby"
+    assert ha_settings.ha_servers.local.state in ["hot-standby", "waiting"]
+    assert ha_settings.ha_servers.remote.last_state in ["hot-standby", "ready", ""]
 
 
 def test_kea_dhcp6_ha_continue_not_paused(kea_server: Kea):

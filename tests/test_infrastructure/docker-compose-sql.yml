@@ -1,17 +1,16 @@
 version: '3.7'
 services:
   db:
-    image: mysql:latest
+    image: mysql:9.2.0
     command:
       --bind-address=0.0.0.0
-      --ssl=0
-      --tls-version=''
-      --host-cache-size=0
     restart: always
     environment:
       MYSQL_DATABASE: "kea"
       MYSQL_ROOT_PASSWORD: "secret123"
-      MYSQL_ROOT_HOST: "0.0.0.0"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_USER: kea
+      MYSQL_PASSWORD: "secret123"
     ports:
       - 3306:3306
     volumes:

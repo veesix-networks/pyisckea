@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2023 Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2012-2025 Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -5680,6 +5680,8 @@ UPDATE schema_version
 -- We have to play some games to make lease address
 -- binary, primary key and retain its place as first
 -- column.
+-- Turn off Mariadb default/on-update for expire column
+ALTER TABLE lease6 MODIFY expire timestamp NULL;
 -- Store binary values for address in binaddr column
 DROP INDEX lease6_by_binaddr ON lease6;
 UPDATE lease6 set binaddr = inet6_aton(address);
@@ -5811,6 +5813,489 @@ UPDATE schema_version
     SET version = '19', minor = '0';
 
 -- This line concludes the schema upgrade to version 19.0.
+
+-- This line starts the schema upgrade to version 20.0.
+
+-- Convert ddns-use-conflict-resolution to ddns-conflict-resolution-mode
+SET @disable_audit = 1;
+UPDATE dhcp4_global_parameter
+SET name = 'ddns-conflict-resolution-mode', value = 'check-with-dhcid', parameter_type = 4
+WHERE name = 'ddns-use-conflict-resolution' and value = '1';
+
+UPDATE dhcp4_global_parameter
+SET name = 'ddns-conflict-resolution-mode', value = 'no-check-with-dhcid', parameter_type = 4
+WHERE name = 'ddns-use-conflict-resolution' and value = '0';
+
+UPDATE dhcp6_global_parameter
+SET name = 'ddns-conflict-resolution-mode', value = 'check-with-dhcid', parameter_type = 4
+WHERE name = 'ddns-use-conflict-resolution' and value = '1';
+
+UPDATE dhcp6_global_parameter
+SET name = 'ddns-conflict-resolution-mode', value = 'no-check-with-dhcid', parameter_type = 4
+WHERE name = 'ddns-use-conflict-resolution' and value = '0';
+
+-- Add a constraint on lease6_relay_id that any lease_addr must map to
+-- a lease6 address.
+ALTER TABLE lease6_relay_id
+    ADD CONSTRAINT fk_lease6_relay_id_addr FOREIGN KEY (lease_addr)
+    REFERENCES lease6 (address) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- Add a constraint on lease6_remote_id that any lease_addr must map to
+-- a lease6 address.
+ALTER TABLE lease6_remote_id
+    ADD CONSTRAINT fk_lease6_remote_id_addr FOREIGN KEY (lease_addr)
+    REFERENCES lease6 (address) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '20', minor = '0';
+
+-- This line concludes the schema upgrade to version 20.0.
+
+-- This line starts the schema upgrade to version 21.0.
+
+-- Add subnet id and address index for lease6.
+CREATE INDEX lease6_by_subnet_id_address ON lease6 (subnet_id, address ASC);
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '21', minor = '0';
+
+-- This line concludes the schema upgrade to version 21.0.
+
+-- This line starts the schema upgrade to version 22.0.
+
+-- Turn off Mariadb default/on-update for expire column
+ALTER TABLE lease4 MODIFY expire timestamp NULL;
+ALTER TABLE lease6 MODIFY expire timestamp NULL;
+
+SET @disable_audit = 1;
+
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.override-no-update';
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.override-client-update';
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.replace-client-name';
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.generated-prefix';
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.qualifying-suffix';
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.hostname-char-set';
+DELETE FROM dhcp4_global_parameter WHERE name='dhcp-ddns.hostname-char-replacement';
+
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.override-no-update';
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.override-client-update';
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.replace-client-name';
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.generated-prefix';
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.qualifying-suffix';
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.hostname-char-set';
+DELETE FROM dhcp6_global_parameter WHERE name='dhcp-ddns.hostname-char-replacement';
+
+UPDATE dhcp4_global_parameter SET name='reservations-global', value='1', parameter_type=2 WHERE name='reservation-mode' AND value='global';
+UPDATE dhcp4_global_parameter SET name='reservations-in-subnet', value='1', parameter_type=2 WHERE name='reservation-mode' AND value='all';
+UPDATE dhcp4_global_parameter SET name='reservations-in-subnet', value='0', parameter_type=2 WHERE name='reservation-mode' AND value='disabled';
+UPDATE dhcp4_global_parameter SET name='reservations-in-subnet', value='0', parameter_type=2 WHERE name='reservation-mode' AND value='off';
+UPDATE dhcp4_global_parameter SET name='reservations-out-of-pool', value='1', parameter_type=2 WHERE name='reservation-mode' AND value='out-of-pool';
+
+UPDATE dhcp6_global_parameter SET name='reservations-global', value='1', parameter_type=2 WHERE name='reservation-mode' AND value='global';
+UPDATE dhcp6_global_parameter SET name='reservations-in-subnet', value='1', parameter_type=2 WHERE name='reservation-mode' AND value='all';
+UPDATE dhcp6_global_parameter SET name='reservations-in-subnet', value='0', parameter_type=2 WHERE name='reservation-mode' AND value='disabled';
+UPDATE dhcp6_global_parameter SET name='reservations-in-subnet', value='0', parameter_type=2 WHERE name='reservation-mode' AND value='off';
+UPDATE dhcp6_global_parameter SET name='reservations-out-of-pool', value='1', parameter_type=2 WHERE name='reservation-mode' AND value='out-of-pool';
+
+SET @disable_audit = 0;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '22', minor = '0';
+
+-- This line concludes the schema upgrade to version 22.0.
+
+-- This line starts the schema upgrade to version 22.0.
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '22', minor = '0';
+
+-- This line concludes the schema upgrade to version 22.0.
+
+-- This line starts the schema upgrade to version 23.0.
+
+-- Introduce new lease state indicating that the lease has been
+-- released by a client.
+INSERT INTO lease_state VALUES (3, 'released');
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '23', minor = '0';
+
+-- This line concludes the schema upgrade to version 23.0.
+
+-- This line starts the schema upgrade to version 24.0.
+
+SET @disable_audit = 1;
+
+DELETE FROM dhcp4_global_parameter WHERE name='control-socket.socket-name';
+DELETE FROM dhcp4_global_parameter WHERE name='control-socket.socket-type';
+
+DELETE FROM dhcp6_global_parameter WHERE name='control-socket.socket-name';
+DELETE FROM dhcp6_global_parameter WHERE name='control-socket.socket-type';
+
+SET @disable_audit = 0;
+
+-- Create a function to conditionally migrate option_def data type
+-- values.  If they are updating from 2.6.1 this has been done already
+-- and we don't want to do it twice.
+DROP PROCEDURE IF EXISTS updateOptionDataDef;
+DELIMITER $$
+CREATE PROCEDURE updateOptionDataDef()
+BEGIN
+    DECLARE skipper TINYINT;
+
+    SELECT COUNT(table_name) FROM information_schema.tables
+        WHERE table_schema LIKE database() AND table_name = 'option_def_data_type' INTO skipper;
+
+    IF skipper = 0 THEN
+        -- First we migrate existing OPT_RECORD_TYPE values
+        -- If they're coming from pre-2.6.0 record type is 17, from
+        -- 2.6.0 or 2.7.0 it is 18. No viable to way to know where we
+        -- started.
+        SET @disable_audit = 1;
+        UPDATE dhcp4_option_def SET type = 254 WHERE record_types IS NOT NULL;
+        UPDATE dhcp6_option_def SET type = 254 WHERE record_types IS NOT NULL;
+
+        -- Create the table that enumerates option definition data types.
+        CREATE TABLE option_def_data_type (
+            id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
+            name VARCHAR(32) NOT NULL
+        ) ENGINE = InnoDB;
+
+        -- Now insert supported types.
+        -- We skip (9, 'any-address') as it is not externally supported.
+        INSERT INTO option_def_data_type VALUES
+            (0, 'empty'),
+            (1, 'binary'),
+            (2, 'boolean'),
+            (3, 'int8'),
+            (4, 'int16'),
+            (5, 'int32'),
+            (6, 'uint8'),
+            (7, 'uint16'),
+            (8, 'uint32'),
+            (10, 'ipv4-address'),
+            (11, 'ipv6-address'),
+            (12, 'ipv6-prefix'),
+            (13, 'psid'),
+            (14, 'string'),
+            (15, 'tuple'),
+            (16, 'fqdn'),
+            (17, 'internal'),
+            (254, 'record');
+
+        --  Add foreign key constraints to enforce only valid types.
+        ALTER TABLE dhcp4_option_def
+          ADD CONSTRAINT fk_option_def_data_type4 FOREIGN KEY (type) REFERENCES option_def_data_type(id);
+
+        ALTER TABLE dhcp6_option_def
+          ADD CONSTRAINT fk_option_def_data_type6 FOREIGN KEY (type) REFERENCES option_def_data_type(id);
+        SET @disable_audit = 0;
+    END IF;
+END $$
+DELIMITER ;
+
+CALL updateOptionDataDef();
+
+-- Get rid of the now obsolete function.
+DROP PROCEDURE IF EXISTS updateOptionDataDef;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '24', minor = '0';
+
+-- This line concludes the schema upgrade to version 24.0.
+
+-- This line starts the schema upgrade to version 25.0.
+
+-- Add prefix exclude option to IPv6 reservations.
+ALTER TABLE ipv6_reservations
+    ADD COLUMN excluded_prefix BINARY(16) DEFAULT NULL,
+    ADD COLUMN excluded_prefix_len TINYINT(3) UNSIGNED NOT NULL DEFAULT 0;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '25', minor = '0';
+
+-- This line concludes the schema upgrade to version 25.0.
+
+-- This line starts the schema upgrade to version 26.0.
+
+-- Add client_classes column to options tables for option class taggging.
+ALTER TABLE dhcp4_options
+    ADD COLUMN client_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp6_options
+    ADD COLUMN client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE option_def_data_type SET name='int8' WHERE id = 3;
+
+-- Rename require_client_classes and only_if_required.
+ALTER TABLE dhcp4_shared_network
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp4_subnet
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp4_pool
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp6_shared_network
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp6_subnet
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp6_pool
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp6_pd_pool
+    CHANGE require_client_classes evaluate_additional_classes LONGTEXT DEFAULT NULL;
+
+ALTER TABLE dhcp4_client_class
+    CHANGE only_if_required only_in_additional_list TINYINT NOT NULL DEFAULT '0';
+
+ALTER TABLE dhcp6_client_class
+    CHANGE only_if_required only_in_additional_list TINYINT NOT NULL DEFAULT '0';
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '26', minor = '0';
+
+-- This line concludes the schema upgrade to version 26.0.
+
+-- This line starts the schema upgrade to version 27.0.
+
+SET @disable_audit = 1;
+
+DROP FUNCTION IF EXISTS textToJSONList;
+DELIMITER $$
+CREATE FUNCTION textToJSONList(orig TEXT)
+RETURNS  TEXT
+DETERMINISTIC
+BEGIN
+    IF orig = '' OR orig IS NULL THEN
+        RETURN NULL;
+    END IF;
+
+    RETURN CONCAT('[ "', orig, '" ]');
+END $$
+DELIMITER ;
+
+ALTER TABLE dhcp4_shared_network
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp4_shared_network SET client_classes = textToJSONList(client_classes);
+
+ALTER TABLE dhcp4_subnet
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp4_subnet SET client_classes = textToJSONList(client_classes);
+
+ALTER TABLE dhcp4_pool
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp4_pool SET client_classes = textToJSONList(client_classes);
+
+ALTER TABLE dhcp6_shared_network
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp6_shared_network SET client_classes = textToJSONList(client_classes);
+
+ALTER TABLE dhcp6_subnet
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp6_subnet SET client_classes = textToJSONList(client_classes);
+
+ALTER TABLE dhcp6_pool
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp6_pool SET client_classes = textToJSONList(client_classes);
+
+ALTER TABLE dhcp6_pd_pool
+    CHANGE client_class client_classes LONGTEXT DEFAULT NULL;
+
+UPDATE dhcp6_pd_pool SET client_classes = textToJSONList(client_classes);
+
+DROP FUNCTION textToJSONList;
+
+SET @disable_audit = 0;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '27', minor = '0';
+
+-- This line concludes the schema upgrade to version 27.0.
+
+-- This line starts the schema upgrade to version 28.0.
+
+ALTER TABLE dhcp4_shared_network
+    ADD COLUMN ddns_ttl_percent FLOAT DEFAULT NULL,
+    ADD COLUMN ddns_ttl         INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_min     INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_max     INT(10) DEFAULT NULL;
+
+ALTER TABLE dhcp4_subnet
+    ADD COLUMN ddns_ttl_percent FLOAT DEFAULT NULL,
+    ADD COLUMN ddns_ttl         INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_min     INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_max     INT(10) DEFAULT NULL;
+
+ALTER TABLE dhcp6_shared_network
+    ADD COLUMN ddns_ttl_percent FLOAT DEFAULT NULL,
+    ADD COLUMN ddns_ttl         INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_min     INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_max     INT(10) DEFAULT NULL;
+
+ALTER TABLE dhcp6_subnet
+    ADD COLUMN ddns_ttl_percent FLOAT DEFAULT NULL,
+    ADD COLUMN ddns_ttl         INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_min     INT(10) DEFAULT NULL,
+    ADD COLUMN ddns_ttl_max     INT(10) DEFAULT NULL;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '28', minor = '0';
+
+-- This line concludes the schema upgrade to version 28.0.
+
+-- This line starts the schema upgrade to version 29.0.
+
+-- New lease state for address registration
+INSERT INTO lease_state VALUES (4, 'registered');
+
+-- Update *_lease6_stat stored procedures to count registered leases.
+-- Not *_lease6_pool_stat because a registered address is not from a pool
+-- Not *_lease6_stat_by_client_class because it is for state 0 only
+
+DROP PROCEDURE IF EXISTS lease6_AINS_lease6_stat;
+DELIMITER $$
+CREATE PROCEDURE lease6_AINS_lease6_stat(IN new_state TINYINT,
+                                         IN new_subnet_id INT UNSIGNED,
+                                         IN new_lease_type TINYINT)
+BEGIN
+    IF new_state = 0 OR new_state = 1 OR new_state = 4 THEN
+        -- Update the state count if it exists.
+        UPDATE lease6_stat SET leases = leases + 1
+            WHERE subnet_id = new_subnet_id AND lease_type = new_lease_type
+            AND state = new_state;
+
+        -- Insert the state count record if it does not exist.
+        IF ROW_COUNT() <= 0 THEN
+            INSERT INTO lease6_stat VALUES (new_subnet_id, new_lease_type, new_state, 1);
+        END IF;
+    END IF;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS lease6_AUPD_lease6_stat;
+DELIMITER $$
+CREATE PROCEDURE lease6_AUPD_lease6_stat(IN old_state TINYINT,
+                                         IN old_subnet_id INT UNSIGNED,
+                                         IN old_lease_type TINYINT,
+                                         IN new_state TINYINT,
+                                         IN new_subnet_id INT UNSIGNED,
+                                         IN new_lease_type TINYINT)
+BEGIN
+    IF old_subnet_id != new_subnet_id OR
+       old_lease_type != new_lease_type OR
+       old_state != new_state THEN
+        IF old_state = 0 OR old_state = 1 OR old_state = 4 THEN
+            -- Decrement the old state count if record exists.
+            UPDATE lease6_stat
+                SET leases = IF(leases > 0, leases - 1, 0)
+                WHERE subnet_id = old_subnet_id AND lease_type = old_lease_type
+                AND state = old_state;
+        END IF;
+
+        IF new_state = 0 OR new_state = 1 OR new_state = 4 THEN
+            -- Increment the new state count if record exists
+            UPDATE lease6_stat SET leases = leases + 1
+                WHERE subnet_id = new_subnet_id AND lease_type = new_lease_type
+                AND state = new_state;
+
+            -- Insert new state record if it does not exist
+            IF ROW_COUNT() <= 0 THEN
+                INSERT INTO lease6_stat
+                VALUES (new_subnet_id, new_lease_type, new_state, 1);
+            END IF;
+        END IF;
+    END IF;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS lease6_ADEL_lease6_stat;
+DELIMITER $$
+CREATE PROCEDURE lease6_ADEL_lease6_stat(IN old_state TINYINT,
+                                         IN old_subnet_id INT UNSIGNED,
+                                         IN old_lease_type TINYINT)
+BEGIN
+    IF old_state = 0 OR old_state = 1 OR old_state = 4 THEN
+        -- Decrement the state count if record exists
+        UPDATE lease6_stat
+            SET leases = IF(leases > 0, leases - 1, 0)
+            WHERE subnet_id = old_subnet_id AND lease_type = old_lease_type
+            AND state = old_state;
+    END IF;
+END $$
+DELIMITER ;
+
+-- Reinstall triggers in the case procedures are not called by name.
+
+DROP TRIGGER IF EXISTS lease6_AINS;
+DELIMITER $$
+CREATE TRIGGER lease6_AINS AFTER INSERT ON lease6 FOR EACH ROW
+BEGIN
+    CALL lease6_AINS_lease6_stat(NEW.state, NEW.subnet_id, NEW.lease_type);
+    CALL lease6_AINS_lease6_pool_stat(NEW.state, NEW.subnet_id, NEW.pool_id, NEW.lease_type);
+    IF @json_supported IS NULL THEN
+        SELECT isJsonSupported() INTO @json_supported;
+    END IF;
+    IF @json_supported = 1 THEN
+        CALL lease6_AINS_lease6_stat_by_client_class(NEW.state, NEW.user_context, NEW.lease_type);
+    END IF;
+END $$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS lease6_AUPD;
+DELIMITER $$
+CREATE TRIGGER lease6_AUPD AFTER UPDATE ON lease6 FOR EACH ROW
+BEGIN
+    CALL lease6_AUPD_lease6_stat(OLD.state, OLD.subnet_id, OLD.lease_type, NEW.state, NEW.subnet_id, NEW.lease_type);
+    CALL lease6_AUPD_lease6_pool_stat(OLD.state, OLD.subnet_id, OLD.pool_id, OLD.lease_type, NEW.state, NEW.subnet_id, NEW.pool_id, NEW.lease_type);
+    IF @json_supported IS NULL THEN
+        SELECT isJsonSupported() INTO @json_supported;
+    END IF;
+    IF @json_supported = 1 THEN
+        CALL lease6_AUPD_lease6_stat_by_client_class(OLD.state, OLD.user_context, OLD.lease_type, NEW.state, NEW.user_context, NEW.lease_type);
+    END IF;
+END $$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS lease6_ADEL;
+DELIMITER $$
+CREATE TRIGGER lease6_ADEL AFTER DELETE ON lease6 FOR EACH ROW
+BEGIN
+    CALL lease6_ADEL_lease6_stat(OLD.state, OLD.subnet_id, OLD.lease_type);
+    CALL lease6_ADEL_lease6_pool_stat(OLD.state, OLD.subnet_id, OLD.pool_id, OLD.lease_type);
+    IF @json_supported IS NULL THEN
+        SELECT isJsonSupported() INTO @json_supported;
+    END IF;
+    IF @json_supported = 1 THEN
+        CALL lease6_ADEL_lease6_stat_by_client_class(OLD.state, OLD.user_context, OLD.lease_type);
+    END IF;
+END $$
+DELIMITER ;
+
+-- Update the schema version number.
+UPDATE schema_version
+    SET version = '29', minor = '0';
+
+-- This line concludes the schema upgrade to version 29.0.
 
 # Notes:
 #
