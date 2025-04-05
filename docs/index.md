@@ -84,12 +84,33 @@ print(create_subnet.result, create_subnet.text)
 
 ## Basic Authentication
 
-If you have basic authentication enabled on your Kea Servers, initialize the Kea class like this:
+If you have basic authentication enabled on your Kea Servers, import the `BasicAuth` class from the `httpx` library and pass it into the `Kea` object like this:
 
 ```python
-from pykeadhcp import Kea
+from pykeadhcp.kea import Kea
+from httpx import BasicAuth
 
-server = Kea(host="http://localhost", port=8000, use_basic_auth=True, username="your-username", password="your-password")
+auth = BasicAuth("kea", "secret123")
+
+
+api = Kea(host="http://localhost", port=8000, auth=auth)
+```
+
+## TLS
+
+Create a context using the `ssl` library and then pass this context into a httpx `Client` object to be used with Kea like this:
+
+```python
+from httpx import Client
+from pykeadhcp.kea import Kea
+
+ctx = ssl.create_default_context(cafile="/path/to/the/ca-cert.pem")
+ctx.load_cert_chain(
+    certfile="/path/to/the/agent-cert.pem", keyfile="/path/to/the/agent-key.pem"
+)
+
+client = Client(verify=ctx)
+api = Kea(host="http://localhost", port=8000, client=client)
 ```
 
 ## API Reference
