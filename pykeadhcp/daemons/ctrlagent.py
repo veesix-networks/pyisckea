@@ -19,8 +19,8 @@ class CtrlAgent:
                 hooks=self.cached_config["Control-agent"]["hooks-libraries"]
             )
             self.api.hook_library[self.service] = self.hook_libraries
-        except:
-            pass
+        except Exception as e:
+            raise e
 
     def refresh_cached_config(self):
         """Sets the cached_config variable

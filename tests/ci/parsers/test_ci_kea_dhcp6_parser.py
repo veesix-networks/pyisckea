@@ -120,7 +120,7 @@ def test_kea_dhcp6_parser_get_reservation_ip(dhcp6_parser: Dhcp6Parser):
 
 def test_kea_dhcp6_parser_get_reservation_not_exist(dhcp6_parser: Dhcp6Parser):
     no_reservation = dhcp6_parser.get_reservation_by_ip(ip_address="2001:db8::124")
-    assert no_reservation == None
+    assert no_reservation is None
 
 
 def test_kea_dhcp6_parser_get_resrvation_by_hw_address(dhcp6_parser: Dhcp6Parser):
@@ -155,7 +155,7 @@ def test_kea_dhcp6_parser_remove_reservation(dhcp6_parser: Dhcp6Parser):
     dhcp6_parser.remove_reservation(id=40123, ip_address="2001:db8::123")
 
     no_reservation = dhcp6_parser.get_reservation_by_ip(ip_address="2001:db8::123")
-    assert no_reservation == None
+    assert no_reservation is None
 
     subnet = dhcp6_parser.get_subnet(id=40123)
     assert len(subnet.reservations) == 0
@@ -165,7 +165,7 @@ def test_kea_dhcp6_parser_remove_reservation_not_exist(dhcp6_parser: Dhcp6Parser
     no_reservation = dhcp6_parser.remove_reservation(
         id=40123, ip_address="2001:db8::123"
     )
-    assert no_reservation == None
+    assert no_reservation is None
 
 
 def test_kea_dhcp6_parser_subnet_add_pool(dhcp6_parser: Dhcp6Parser):
@@ -222,4 +222,4 @@ def test_kea_dhcp6_parser_remove_subnet_from_shared_network(dhcp6_parser: Dhcp6P
 def test_kea_dhcp6_parser_remove_shared_network(dhcp6_parser: Dhcp6Parser):
     dhcp6_parser.remove_shared_network(name="pykeadhcp-dhcp6-parser")
     shared_network = dhcp6_parser.get_shared_network(name="pykeadhcp-dhcp6-parser")
-    assert shared_network == None
+    assert shared_network is None

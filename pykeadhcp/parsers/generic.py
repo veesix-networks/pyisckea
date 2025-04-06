@@ -1,6 +1,3 @@
-from typing import List
-
-
 class GenericParser:
     """A Parser does not interact with the ISC Kea Daemon APIs but essentially builds
     similar functionality for a local cached config file. If you do not pay for the

@@ -1,5 +1,4 @@
 from pykeadhcp import Kea
-import pytest
 
 """ha process:
 status-get (get HA mode)

@@ -20,7 +20,7 @@ del
 def test_kea_dhcp6_network6_get_non_existent(kea_server: Kea):
     name = "pykeadhcp-pytest"
     with pytest.raises(KeaSharedNetworkNotFoundException):
-        response = kea_server.dhcp6.network6_get(name=name)
+        kea_server.dhcp6.network6_get(name=name)
 
 
 def test_kea_dhcp6_network6_add(kea_server: Kea):

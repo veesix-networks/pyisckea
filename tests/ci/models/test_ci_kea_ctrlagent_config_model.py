@@ -22,7 +22,7 @@ def test_ci_kea_ctrlagent_config_model_check_required(
 def test_ci_kea_ctrlagent_config_model_control_sockets(
     ctrlagent_model: CtrlAgentDaemonConfig,
 ):
-    assert type(ctrlagent_model.control_sockets) == ControlSockets
+    assert type(ctrlagent_model.control_sockets) is ControlSockets
 
     assert ctrlagent_model.control_sockets.d2.socket_name
     assert ctrlagent_model.control_sockets.d2.socket_type == "unix"

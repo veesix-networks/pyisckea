@@ -77,7 +77,7 @@ def test_kea_dhcp4_parser_get_reservation_ip(dhcp4_parser: Dhcp4Parser):
 
 def test_kea_dhcp4_parser_get_reservation_not_exist(dhcp4_parser: Dhcp4Parser):
     no_reservation = dhcp4_parser.get_reservation_by_ip(ip_address="192.0.2.2")
-    assert no_reservation == None
+    assert no_reservation is None
 
 
 def test_kea_dhcp4_parser_get_reservation_by_hw_address(dhcp4_parser: Dhcp4Parser):
@@ -128,7 +128,7 @@ def test_kea_dhcp4_parser_remove_reservation(dhcp4_parser: Dhcp4Parser):
     dhcp4_parser.remove_reservation(id=40123, ip_address="192.0.2.1")
 
     no_reservation = dhcp4_parser.get_reservation_by_ip(ip_address="192.0.2.1")
-    assert no_reservation == None
+    assert no_reservation is None
 
     subnet = dhcp4_parser.get_subnet(id=40123)
     assert len(subnet.reservations) == 0
@@ -136,7 +136,7 @@ def test_kea_dhcp4_parser_remove_reservation(dhcp4_parser: Dhcp4Parser):
 
 def test_kea_dhcp4_parser_remove_reservation_not_exist(dhcp4_parser: Dhcp4Parser):
     no_reservation = dhcp4_parser.remove_reservation(id=40123, ip_address="192.0.2.1")
-    assert no_reservation == None
+    assert no_reservation is None
 
 
 def test_kea_dhcp4_parser_subnet_add_pool(dhcp4_parser: Dhcp4Parser):
@@ -191,4 +191,4 @@ def test_kea_dhcp4_parser_remove_subnet_from_shared_network(dhcp4_parser: Dhcp4P
 def test_kea_dhcp4_parser_remove_shared_network(dhcp4_parser: Dhcp4Parser):
     dhcp4_parser.remove_shared_network(name="pykeadhcp-dhcp4-parser")
     shared_network = dhcp4_parser.get_shared_network(name="pykeadhcp-dhcp4-parser")
-    assert shared_network == None
+    assert shared_network is None

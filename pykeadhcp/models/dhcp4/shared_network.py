@@ -1,4 +1,4 @@
-from typing import Any, List, Optional, TYPE_CHECKING
+from typing import List, Optional
 from pydantic import Field
 
 from pykeadhcp.models.generic.shared_network import SharedNetwork

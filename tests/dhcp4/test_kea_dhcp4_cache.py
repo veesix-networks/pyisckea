@@ -1,7 +1,5 @@
 from pykeadhcp import Kea
-from pykeadhcp.models.dhcp4.subnet import Subnet4
 from pykeadhcp.models.dhcp4.reservation import Reservation4
-import pytest
 
 """cache process:
 cache get (none)

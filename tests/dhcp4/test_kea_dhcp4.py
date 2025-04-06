@@ -1,5 +1,4 @@
 from pykeadhcp import Kea
-import pytest
 
 
 def test_kea_dhcp4_build_report(kea_server: Kea):

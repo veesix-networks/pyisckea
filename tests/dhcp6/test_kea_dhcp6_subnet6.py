@@ -18,7 +18,7 @@ del
 
 def test_kea_dhcp6_subnet6_get_non_existent(kea_server: Kea):
     with pytest.raises(KeaSubnetNotFoundException):
-        response = kea_server.dhcp6.subnet6_get(subnet_id=40123)
+        kea_server.dhcp6.subnet6_get(subnet_id=40123)
 
 
 def test_kea_dhcp6_subnet6_add(kea_server: Kea):

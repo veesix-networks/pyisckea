@@ -1,6 +1,5 @@
 from pykeadhcp import Kea
 from pykeadhcp.models.dhcp6.subnet import Subnet6
-from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.exceptions import KeaSubnetNotFoundException
 import pytest
 

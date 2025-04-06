@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 from pykeadhcp.models.generic.daemon import CommonDaemonConfig
 from pykeadhcp.models.generic.control_socket import ControlSockets
 

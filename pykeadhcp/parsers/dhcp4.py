@@ -196,7 +196,7 @@ class Dhcp4Parser(GenericParser):
         try:
             ipv4_start = IPv4Address(start)
             ipv4_end = IPv4Address(end)
-        except:
+        except Exception:
             raise exceptions.ParserPoolInvalidAddressError(start, end)
 
         existing_subnet = self.get_subnet(id)

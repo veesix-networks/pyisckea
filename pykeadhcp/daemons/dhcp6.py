@@ -8,7 +8,6 @@ from pykeadhcp.models.generic.remote_server import RemoteServer
 from pykeadhcp.models.generic.option_def import OptionDef
 from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.models.dhcp6.lease import Lease6, Lease6Page, Lease6TypeEnum
-from pykeadhcp.models.dhcp6.pd_pool import PDPool
 from pykeadhcp.models.dhcp6.reservation import Reservation6
 from pykeadhcp.models.dhcp6.shared_network import SharedNetwork6
 from pykeadhcp.models.dhcp6.subnet import Subnet6
@@ -40,8 +39,8 @@ class Dhcp6:
                 hooks=self.cached_config[self.service.capitalize()]["hooks-libraries"]
             )
             self.api.hook_library[self.service] = self.hook_libraries
-        except:
-            pass
+        except Exception as e:
+            raise e
 
     def refresh_cached_config(self):
         """Sets the cached_config variable

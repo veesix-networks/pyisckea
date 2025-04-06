@@ -1,6 +1,5 @@
 from pykeadhcp import Kea
 from pykeadhcp.models.generic.option_def import OptionDef
-import pytest
 
 """remote-option-def6 process:
 

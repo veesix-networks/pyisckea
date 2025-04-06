@@ -197,7 +197,7 @@ class Dhcp6Parser(GenericParser):
         try:
             ipv6_start = IPv6Address(start)
             ipv6_end = IPv6Address(end)
-        except:
+        except Exception:
             raise exceptions.ParserPoolInvalidAddressError(start, end)
 
         existing_subnet = self.get_subnet(id)

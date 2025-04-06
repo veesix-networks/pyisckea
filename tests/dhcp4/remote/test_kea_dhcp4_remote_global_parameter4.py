@@ -1,8 +1,4 @@
 from pykeadhcp import Kea
-from pykeadhcp.models.dhcp4.shared_network import SharedNetwork4
-from pykeadhcp.models.dhcp4.subnet import Subnet4
-from pykeadhcp.exceptions import KeaSharedNetworkNotFoundException
-import pytest
 
 """remote-global-parameter4 process:
 

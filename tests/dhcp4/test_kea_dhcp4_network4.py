@@ -20,7 +20,7 @@ list
 def test_kea_dhcp4_network4_get_non_existent(kea_server: Kea):
     name = "pykeadhcp-pytest"
     with pytest.raises(KeaSharedNetworkNotFoundException):
-        response = kea_server.dhcp4.network4_get(name=name)
+        kea_server.dhcp4.network4_get(name=name)
 
 
 def test_kea_dhcp4_network4_add(kea_server: Kea):

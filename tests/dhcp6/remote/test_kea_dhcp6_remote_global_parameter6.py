@@ -1,6 +1,4 @@
 from pykeadhcp import Kea
-from pykeadhcp.exceptions import KeaSharedNetworkNotFoundException
-import pytest
 
 """remote-global-parameter6 process:
 

@@ -1,4 +1,4 @@
-from typing import Optional, List, Union
+from typing import List, Union
 from pykeadhcp.models.generic.base import KeaBaseModel
 from pykeadhcp.models.enums import HAModeTypeEnum, HARoleTypeEnum, HAStateTypeEnum
 

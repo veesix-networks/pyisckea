@@ -1,8 +1,6 @@
 from typing import Optional, List, Union
 from pydantic import Field
 from pykeadhcp.models.generic.base import KeaModel
-from pykeadhcp.models.generic.hook import Hook
-from pykeadhcp.models.generic.logger import Logger
 from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.models.enums import ReservationMode, DDNSReplaceClientNameEnum
 
