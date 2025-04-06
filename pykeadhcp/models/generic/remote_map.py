@@ -1,8 +1,10 @@
 from typing import Optional
+
 from pydantic import Field
-from pykeadhcp.models.generic.base import KeaBaseModel
-from pykeadhcp.models.enums import RemoteMapTypeEnum
 from typing_extensions import Annotated
+
+from pykeadhcp.models.enums import RemoteMapTypeEnum
+from pykeadhcp.models.generic.base import KeaBaseModel
 
 
 class RemoteMap(KeaBaseModel):

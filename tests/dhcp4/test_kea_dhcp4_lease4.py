@@ -1,7 +1,8 @@
+import pytest
+
 from pykeadhcp import Kea
 from pykeadhcp.exceptions import KeaLeaseNotFoundException
 from pykeadhcp.models.dhcp4.subnet import Subnet4
-import pytest
 
 """lease4 process:
 get (non-existent lease)

@@ -1,15 +1,15 @@
-from pykeadhcp.parsers.generic import GenericParser
+from ipaddress import IPv6Address, IPv6Network
+
 from pykeadhcp.models.dhcp6.config import Dhcp6DaemonConfig
+from pykeadhcp.models.dhcp6.pd_pool import PDPool
+from pykeadhcp.models.dhcp6.reservation import Reservation6
 from pykeadhcp.models.dhcp6.shared_network import SharedNetwork6
 from pykeadhcp.models.dhcp6.subnet import Subnet6
-from pykeadhcp.models.dhcp6.reservation import Reservation6
-from pykeadhcp.models.generic.pool import Pool
-from pykeadhcp.models.dhcp6.pd_pool import PDPool
-from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.models.enums import HostReservationIdentifierEnum
+from pykeadhcp.models.generic.option_data import OptionData
+from pykeadhcp.models.generic.pool import Pool
 from pykeadhcp.parsers import exceptions
-
-from ipaddress import IPv6Address, IPv6Network
+from pykeadhcp.parsers.generic import GenericParser
 
 
 class Dhcp6Parser(GenericParser):

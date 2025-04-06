@@ -1,6 +1,7 @@
 from typing import Optional
-from pykeadhcp.models.generic.config import CommonConfig
+
 from pykeadhcp.models.enums import ServerIdTypeEnum
+from pykeadhcp.models.generic.config import CommonConfig
 
 
 class ServerId(CommonConfig):

@@ -1,6 +1,7 @@
 from typing import Optional
+
+from pykeadhcp.models.enums import NCRFormatEnum, NCRProtocolEnum
 from pykeadhcp.models.generic.config import CommonConfig
-from pykeadhcp.models.enums import NCRProtocolEnum, NCRFormatEnum
 
 
 class DhcpDdns(CommonConfig):

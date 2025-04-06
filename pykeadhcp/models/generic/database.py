@@ -1,6 +1,7 @@
 from typing import Optional
+
+from pykeadhcp.models.enums import DatabaseOnFailEnum, DatabaseTypeEnum
 from pykeadhcp.models.generic.base import KeaBaseModel
-from pykeadhcp.models.enums import DatabaseTypeEnum, DatabaseOnFailEnum
 
 
 class Database(KeaBaseModel):

@@ -1,5 +1,5 @@
-from pykeadhcp.parsers.generic import GenericParser
 from pykeadhcp.models.ctrlagent.config import CtrlAgentDaemonConfig
+from pykeadhcp.parsers.generic import GenericParser
 
 
 class CtrlAgentParser(GenericParser):

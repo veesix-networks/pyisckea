@@ -1,7 +1,8 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp6.subnet import Subnet6
-from pykeadhcp.exceptions import KeaSubnetNotFoundException
 import pytest
+
+from pykeadhcp import Kea
+from pykeadhcp.exceptions import KeaSubnetNotFoundException
+from pykeadhcp.models.dhcp6.subnet import Subnet6
 
 """subnet4 process:
 get (non-existent subnet)

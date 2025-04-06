@@ -1,6 +1,7 @@
 from typing import List, Union
-from pykeadhcp.models.generic.base import KeaBaseModel
+
 from pykeadhcp.models.enums import HAModeTypeEnum, HARoleTypeEnum, HAStateTypeEnum
+from pykeadhcp.models.generic.base import KeaBaseModel
 
 
 class HAServerLocal(KeaBaseModel):

@@ -1,7 +1,8 @@
+import pytest
+
 from pykeadhcp import Kea
 from pykeadhcp.exceptions import KeaClientClassNotFoundException
 from pykeadhcp.models.dhcp6.client_class import ClientClass6
-import pytest
 
 """class process:class_del
 get (non-existent client-class)

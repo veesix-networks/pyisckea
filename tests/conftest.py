@@ -1,7 +1,9 @@
-import pytest
 import json
 from pathlib import Path
+
+import pytest
 from pytest import FixtureRequest
+
 from pykeadhcp import Kea
 from pykeadhcp.models.ctrlagent.config import CtrlAgentDaemonConfig
 from pykeadhcp.models.dhcp4.config import Dhcp4DaemonConfig

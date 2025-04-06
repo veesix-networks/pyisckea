@@ -1,5 +1,7 @@
 from typing import List
+
 from pydantic import Field
+
 from pykeadhcp.models.generic.base import KeaBaseModel
 
 

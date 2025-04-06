@@ -1,11 +1,13 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pydantic import Field
-from pykeadhcp.models.generic.daemon import CommonDhcpDaemonConfig
+
 from pykeadhcp.models.dhcp6.client_class import ClientClass6
-from pykeadhcp.models.dhcp6.shared_network import SharedNetwork6
-from pykeadhcp.models.dhcp6.subnet import Subnet6
 from pykeadhcp.models.dhcp6.reservation import Reservation6
 from pykeadhcp.models.dhcp6.server_id import ServerId
+from pykeadhcp.models.dhcp6.shared_network import SharedNetwork6
+from pykeadhcp.models.dhcp6.subnet import Subnet6
+from pykeadhcp.models.generic.daemon import CommonDhcpDaemonConfig
 
 
 class Dhcp6DaemonConfig(CommonDhcpDaemonConfig):

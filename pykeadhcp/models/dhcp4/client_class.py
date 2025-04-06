@@ -1,5 +1,7 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pydantic import Field
+
 from pykeadhcp.models.generic.client_class import ClientClass
 from pykeadhcp.models.generic.option_def import OptionDef
 

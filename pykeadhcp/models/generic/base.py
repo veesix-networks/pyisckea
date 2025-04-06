@@ -1,5 +1,6 @@
 from typing import Optional
-from pydantic import ConfigDict, BaseModel
+
+from pydantic import BaseModel, ConfigDict
 
 
 def normalize_keys(string: str) -> str:

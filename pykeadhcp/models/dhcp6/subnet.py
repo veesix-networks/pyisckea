@@ -1,8 +1,10 @@
 from typing import List, Optional
+
 from pydantic import Field
-from pykeadhcp.models.generic.subnet import Subnet
+
 from pykeadhcp.models.dhcp6.pd_pool import PDPool
 from pykeadhcp.models.dhcp6.reservation import Reservation6
+from pykeadhcp.models.generic.subnet import Subnet
 
 
 class Subnet6(Subnet):

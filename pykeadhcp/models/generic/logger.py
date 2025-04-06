@@ -1,8 +1,10 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pydantic import Field
-from pykeadhcp.models.generic.base import KeaBaseModel, KeaModel
-from pykeadhcp.models.enums import LoggerLevelEnum
 from typing_extensions import Annotated
+
+from pykeadhcp.models.enums import LoggerLevelEnum
+from pykeadhcp.models.generic.base import KeaBaseModel, KeaModel
 
 
 class Output(KeaBaseModel):

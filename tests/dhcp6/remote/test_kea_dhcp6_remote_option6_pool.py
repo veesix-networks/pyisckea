@@ -1,6 +1,6 @@
 from pykeadhcp import Kea
-from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.models.dhcp6.subnet import Subnet6
+from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.models.generic.pool import Pool
 
 """remote-option6-pool process:

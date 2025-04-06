@@ -1,6 +1,7 @@
 from typing import Optional
-from pykeadhcp.models.generic.daemon import CommonDaemonConfig
+
 from pykeadhcp.models.generic.control_socket import ControlSockets
+from pykeadhcp.models.generic.daemon import CommonDaemonConfig
 
 
 class CtrlAgentDaemonConfig(CommonDaemonConfig):

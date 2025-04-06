@@ -1,4 +1,5 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pykeadhcp.models.generic.config import CommonConfig
 from pykeadhcp.models.generic.option_data import OptionData
 

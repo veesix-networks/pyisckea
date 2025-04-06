@@ -1,4 +1,5 @@
 from typing import Optional
+
 from pykeadhcp.models.generic.base import KeaBaseModel
 from pykeadhcp.models.generic.config import CommonConfig
 

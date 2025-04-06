@@ -1,8 +1,9 @@
 from typing import List, Optional
+
 from pydantic import Field
 
-from pykeadhcp.models.generic.shared_network import SharedNetwork
 from pykeadhcp.models.dhcp4.subnet import Subnet4
+from pykeadhcp.models.generic.shared_network import SharedNetwork
 
 
 class SharedNetwork4(SharedNetwork):

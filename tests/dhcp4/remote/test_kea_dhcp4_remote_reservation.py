@@ -9,10 +9,11 @@ must be specified and it must not operate in read-only mode
 (for details, see the hosts-databases descriptions in DHCPv4 Hosts Database Configuration and DHCPv6 Hosts Database Configuration)."
 """
 
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp4.subnet import Subnet4
-from pykeadhcp.exceptions import KeaReservationNotFoundException, KeaException
 import pytest
+
+from pykeadhcp import Kea
+from pykeadhcp.exceptions import KeaException, KeaReservationNotFoundException
+from pykeadhcp.models.dhcp4.subnet import Subnet4
 
 """reservation process:
 reservation-get non existent

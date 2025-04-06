@@ -1,7 +1,9 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pydantic import Field
-from pykeadhcp.models.generic.config import CommonConfig
+
 from pykeadhcp.models.enums import AuthenticationTypeEnum
+from pykeadhcp.models.generic.config import CommonConfig
 
 
 class AuthenticationClient(CommonConfig):

@@ -1,8 +1,10 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pydantic import Field
+from typing_extensions import Annotated
+
 from pykeadhcp.models.generic.dhcp_common import CommonDHCPParams
 from pykeadhcp.models.generic.pool import Pool
-from typing_extensions import Annotated
 
 
 # check whether id is still optional with new versions of kea

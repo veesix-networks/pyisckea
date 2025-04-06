@@ -1,14 +1,14 @@
-from pykeadhcp.parsers.generic import GenericParser
+from ipaddress import IPv4Address, IPv4Network
+
 from pykeadhcp.models.dhcp4.config import Dhcp4DaemonConfig
+from pykeadhcp.models.dhcp4.reservation import Reservation4
 from pykeadhcp.models.dhcp4.shared_network import SharedNetwork4
 from pykeadhcp.models.dhcp4.subnet import Subnet4
-from pykeadhcp.models.dhcp4.reservation import Reservation4
-from pykeadhcp.models.generic.pool import Pool
-from pykeadhcp.models.generic.option_data import OptionData
 from pykeadhcp.models.enums import HostReservationIdentifierEnum
+from pykeadhcp.models.generic.option_data import OptionData
+from pykeadhcp.models.generic.pool import Pool
 from pykeadhcp.parsers import exceptions
-
-from ipaddress import IPv4Address, IPv4Network
+from pykeadhcp.parsers.generic import GenericParser
 
 
 class Dhcp4Parser(GenericParser):

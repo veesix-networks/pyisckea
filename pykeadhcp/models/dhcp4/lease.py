@@ -1,5 +1,7 @@
 from typing import List, Optional
+
 from pydantic import Field
+
 from pykeadhcp.models.generic.lease import Lease, LeasePage
 
 

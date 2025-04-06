@@ -1,4 +1,5 @@
 from typing import Optional
+
 from pykeadhcp.models.generic.reservation import Reservation
 
 

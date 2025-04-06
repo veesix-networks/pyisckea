@@ -1,11 +1,12 @@
 import pytest
+
 from pykeadhcp.parsers.dhcp4 import Dhcp4Parser
 from pykeadhcp.parsers.exceptions import (
-    ParserSubnetIDAlreadyExistError,
-    ParserSubnetCIDRAlreadyExistError,
-    ParserReservationAlreadyExistError,
-    ParserSubnetPoolAlreadyExistError,
     ParserPoolAddressNotInSubnetError,
+    ParserReservationAlreadyExistError,
+    ParserSubnetCIDRAlreadyExistError,
+    ParserSubnetIDAlreadyExistError,
+    ParserSubnetPoolAlreadyExistError,
 )
 
 

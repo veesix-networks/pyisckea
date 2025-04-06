@@ -1,7 +1,9 @@
-from typing import List, Optional, Annotated
-from pykeadhcp.models.generic.subnet import Subnet
-from pykeadhcp.models.dhcp4.reservation import Reservation4
+from typing import Annotated, List, Optional
+
 from pydantic import ConfigDict, Field
+
+from pykeadhcp.models.dhcp4.reservation import Reservation4
+from pykeadhcp.models.generic.subnet import Subnet
 
 
 class Subnet4(Subnet):

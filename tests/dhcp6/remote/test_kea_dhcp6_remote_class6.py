@@ -1,7 +1,8 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp6.client_class import ClientClass6
-from pykeadhcp.exceptions import KeaClientClassNotFoundException
 import pytest
+
+from pykeadhcp import Kea
+from pykeadhcp.exceptions import KeaClientClassNotFoundException
+from pykeadhcp.models.dhcp6.client_class import ClientClass6
 
 """remote-class6 process:
 

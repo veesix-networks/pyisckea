@@ -1,5 +1,7 @@
-from typing import Optional, List
-from pydantic import ConfigDict, BaseModel, Field
+from typing import List, Optional
+
+from pydantic import BaseModel, ConfigDict, Field
+
 from pykeadhcp.models.enums import StatusEnum
 
 

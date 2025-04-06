@@ -1,10 +1,12 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from pydantic import Field
-from pykeadhcp.models.generic.daemon import CommonDhcpDaemonConfig
+
 from pykeadhcp.models.dhcp4.client_class import ClientClass4
+from pykeadhcp.models.dhcp4.reservation import Reservation4
 from pykeadhcp.models.dhcp4.shared_network import SharedNetwork4
 from pykeadhcp.models.dhcp4.subnet import Subnet4
-from pykeadhcp.models.dhcp4.reservation import Reservation4
+from pykeadhcp.models.generic.daemon import CommonDhcpDaemonConfig
 
 
 class Dhcp4DaemonConfig(CommonDhcpDaemonConfig):

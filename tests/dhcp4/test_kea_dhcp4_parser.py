@@ -1,4 +1,5 @@
 import json
+
 from pykeadhcp import Kea
 from pykeadhcp.parsers.dhcp4 import Dhcp4Parser
 

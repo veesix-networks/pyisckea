@@ -1,7 +1,9 @@
 from typing import Optional
+
 from pydantic import StringConstraints
-from pykeadhcp.models.generic.base import KeaBaseModel
 from typing_extensions import Annotated
+
+from pykeadhcp.models.generic.base import KeaBaseModel
 
 
 class RemoteServer(KeaBaseModel):
