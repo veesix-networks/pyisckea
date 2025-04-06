@@ -6,17 +6,17 @@
   <img src="docs/img/logo.png" alt="Logo" style="max-width: 100%; height: auto; padding-bottom: 8px;">
 </p>
 
-<a href="https://github.com/veesix-networks/pykeadhcp" target="_blank">pykeadhcp</a> is a python module used to interact with the <a href="https://www.isc.org/kea/" target="_blank">ISC Kea DHCP</a> daemons running on an ISC Kea server. This module also provides optional <a href="https://docs.pydantic.dev/latest/why/" target="_blank">Pydantic</a> support to improve the developer experience when working in a code editor like VSCode and also provide super fast data validation functionality on python objects before they get serialized and sent to the Kea APIs.
+<a href="https://github.com/veesix-networks/pykeadhcp" target="_blank">pykeadhcp</a> is a python module used to interact with the <a href="https://www.isc.org/kea/" target="_blank">ISC Kea DHCP</a> daemons running on an ISC Kea server. This module also implements <a href="https://docs.pydantic.dev/latest/why/" target="_blank">Pydantic</a> to improve the developer experience when working in a code editor like VSCode and also provide super fast data validation functionality on python objects before they get serialized and sent to the Kea APIs.
 
 ## Get Started
 
-1) Install the module
+1) Install the module.
 
 ```
 pip install pykeadhcp
 ```
 
-2) Import the Kea class
+2) Import the Kea class.
 
 ```python
 from pykeadhcp import Kea
@@ -24,7 +24,7 @@ from pykeadhcp import Kea
 server = Kea("http://localhost:8000")
 ```
 
-3) Call API commands based on the Daemon to interact with the APIs
+3) Call API commands based on the Daemon to interact with the APIs.
 
 ```python
 subnets_v4 = server.dhcp4.subnet4_list()
@@ -69,7 +69,7 @@ print(my_subnet.json(exclude_none=True, indent=4))
 # }
 ```
 
-4) [Optional] Utilize the Pydantic models which provide basic data validation
+4) Utilize the Pydantic models which provide basic data validation.
 
 ```python
 from pykeadhcp.models.dhcp4.subnet import Subnet4
