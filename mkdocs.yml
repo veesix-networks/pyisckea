@@ -38,6 +38,10 @@ extra_css:
 nav:
   - Get Started: 
     - Intro: index.md
+  - Contributing:
+    - PLEASE READ FIRST: contributing/please_read_first.md
+    - Coding Style: contributing/coding_style.md
+    - Tests: contributing/tests.md
   - Author: https://github.com/veesix-networks
 markdown_extensions:
   - tables
