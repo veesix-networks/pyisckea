@@ -19,8 +19,8 @@ class Ddns:
                 hooks=self.cached_config[self.service.capitalize()]["hooks-libraries"]
             )
             self.api.hook_library[self.service] = self.hook_libraries
-        except Exception as e:
-            raise e
+        except Exception:
+            pass
 
     def refresh_cached_config(self):
         """Sets the cached_config variable

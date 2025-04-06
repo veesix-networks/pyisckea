@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from httpx import BasicAuth
 
 import pytest
 from pytest import FixtureRequest
@@ -13,20 +14,35 @@ from pykeadhcp.parsers import CtrlAgentParser, Dhcp4Parser, Dhcp6Parser
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--host",
+        "--kea-host",
         action="store",
-        dest="host",
+        dest="kea_host",
         type=str,
-        help="Host URL for Kea Server API",
-        default="http://127.0.0.1",
+        help="URL for Kea Server API",
+        default="http://127.0.0.1:8000",
     )
     parser.addoption(
-        "--port",
+        "--basic-auth",
+        action="store_true",
+        dest="basic_auth",
+        default=True,
+        help="Use BasicAuth for Kea Server API",
+    )
+    parser.addoption(
+        "--username",
         action="store",
-        dest="port",
-        type=int,
-        help="Port for Kea Server API",
-        default=8000,
+        dest="username",
+        type=str,
+        help="Username for BasicAuth for Kea Server API",
+        default="kea",
+    )
+    parser.addoption(
+        "--password",
+        action="store",
+        dest="password",
+        type=str,
+        help="Password for BasicAuth for Kea Server API",
+        default="secret123",
     )
     parser.addoption(
         "--disable-ssl-verify",
@@ -70,8 +86,10 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="module")
 def kea_server(request: FixtureRequest):
-    host = request.config.getoption("host")
-    port = request.config.getoption("port", default=8000)
+    kea_host = request.config.getoption("kea_host")
+    use_basic_auth = request.config.getoption("basic_auth", default=True)
+    username = request.config.getoption("username")
+    password = request.config.getoption("password")
     disable_ssl_verify = request.config.getoption("disable_ssl_verify", default=False)
     ssl_ca_bundle = request.config.getoption("ssl_ca_bundle", default=None)
     raise_generic_errors = request.config.getoption(
@@ -79,8 +97,8 @@ def kea_server(request: FixtureRequest):
     )
 
     return Kea(
-        host=host,
-        port=port,
+        kea_host=kea_host,
+        auth=BasicAuth(username, password) if use_basic_auth else None,
         raise_generic_errors=raise_generic_errors,
         verify=(
             False

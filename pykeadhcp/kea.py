@@ -24,8 +24,7 @@ class Kea:
     Kea Management API for the various daemons supported.
 
     Args:
-        ip:                     IP address of the Kea server
-        port:                   TCP Port of the Kea Server to access the API
+        kea_host:               The URL for the kea host.
         headers:                Headers to inject in every POST request sent to the API
         auth:                   Use HTTP Basic Auth if Kea is configured for it
         raise_generic_errors:   If True, it will raise a generic error based on Kea Documentation
@@ -38,19 +37,16 @@ class Kea:
 
     def __init__(
         self,
-        host: str,
-        port: int,
+        kea_host: str,
         auth: BasicAuth = None,
         client: Client = Client(),
         raise_generic_errors: bool = False,
         verify: Union[bool, str] = True,
     ):
-        self.host = host
-        self.port = port
+        self.kea_host = kea_host
         self.auth = auth
         self.client = client
         self.services = ["dhcp4", "dhcp6", "ddns", None]  # None = Control-Agent Daemon
-        self.url = f"{self.host}:{self.port}"
         self.raise_generic_errors = raise_generic_errors
         self.verify = verify
         self.RESPONSE_CODES = {
@@ -65,7 +61,6 @@ class Kea:
         self.dhcp4 = Dhcp4(self)
         self.dhcp6 = Dhcp6(self)
 
-        self.client.base_url = self.url
         if self.auth:
             self.client.auth = self.auth
 
@@ -122,7 +117,8 @@ class Kea:
             body:           JSON body to send
         """
         response = self.client.post(
-            url=endpoint,
+            url=self.kea_host + endpoint,
+            auth=self.auth,
             json=body,
             **kwargs,
         )
