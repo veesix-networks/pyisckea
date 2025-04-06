@@ -85,7 +85,9 @@ def kea_server(request: FixtureRequest):
         verify=(
             False
             if disable_ssl_verify
-            else True if not ssl_ca_bundle else ssl_ca_bundle
+            else True
+            if not ssl_ca_bundle
+            else ssl_ca_bundle
         ),
     )
 

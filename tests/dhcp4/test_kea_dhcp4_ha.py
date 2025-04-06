@@ -4,6 +4,7 @@ from pykeadhcp import Kea
 status-get (get HA mode)
 """
 
+
 def test_kea_dhcp4_ha_check_primary(kea_server: Kea):
     status = kea_server.dhcp4.status_get()
 
