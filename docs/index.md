@@ -18,7 +18,7 @@ pip install pykeadhcp
 ```python
 from pykeadhcp import Kea
 
-server = Kea(host="http://localhost", port=8000)
+server = Kea(kea_host="http://localhost:8000")
 ```
 
 3) Call API commands based on the Daemon to interact with the APIs
@@ -93,7 +93,7 @@ from httpx import BasicAuth
 auth = BasicAuth("kea", "secret123")
 
 
-api = Kea(host="http://localhost", port=8000, auth=auth)
+api = Kea(kea_host="http://localhost:8000", auth=auth)
 ```
 
 ## TLS
@@ -110,7 +110,7 @@ ctx.load_cert_chain(
 )
 
 client = Client(verify=ctx)
-api = Kea(host="http://localhost", port=8000, client=client)
+api = Kea(kea_host="http://localhost:8000", client=client)
 ```
 
 ## API Reference
