@@ -1,28 +1,116 @@
-name: CI Production
+name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
 on:
   release:
     types: [created]
 
 jobs:
-  ci:
+  lint:
+    name: Lint and Check Format
     runs-on: ubuntu-latest
-    steps:
-      - name: Repo Checkout
-        uses: actions/checkout@v3
-      - name: Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - uses: psf/black@stable
-        with:
-          options: "--check --verbose --diff"
-      - name: Run image
-        uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: "1.5.1"
-      - name: Build Poetry
-        run: poetry build
-      - name: Publish Package
-        run: poetry publish -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
-        
 
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install the code linting and formatting tool Ruff
+      run: pipx install ruff
+    - name: Lint code with Ruff
+      run: ruff check --output-format=github --target-version=py39
+    - name: Check code formatting with Ruff
+      run: ruff format --diff --target-version=py39
+
+  #test:
+  #  name: Run tests
+  #  runs-on: ubuntu-latest
+  #
+  #  steps:
+  #  - uses: actions/checkout@v4
+  #    with:
+  #      persist-credentials: false
+  #  - name: Set up Python
+  #    uses: actions/setup-python@v5
+  #    with:
+  #      python-version: "3.12"
+  #  - name: Ruff Check
+  #    uses: jpetrucciani/ruff-check@main
+  #    with:
+  #      path: 'cgn_ec/'
+  #  - name: Test with pytest
+  #    run: |
+  #      pip install pytest pytest-cov
+  #      pytest tests/ --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-
+          
+  build:
+    name: Build distribution 📦
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Install pypa/build
+      run: >-
+        python3 -m
+        pip install
+        build
+        --user
+    - name: Build a binary wheel and a source tarball
+      run: python3 -m build
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+  publish-to-pypi:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: startsWith(github.ref, 'refs/tags/') && github.event.release.prerelease == false
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cgn-ec
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution 📦 to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-to-testpypi:
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    if: startsWith(github.ref, 'refs/tags/') && github.event.release.prerelease == true
+    needs:
+    - build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/cgn-ec
+
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution 📦 to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
