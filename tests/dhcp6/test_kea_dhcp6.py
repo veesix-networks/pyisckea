@@ -1,4 +1,4 @@
-from pykeadhcp import Kea
+from pyisckea import Kea
 
 
 def test_kea_dhcp6_build_report(kea_server: Kea):

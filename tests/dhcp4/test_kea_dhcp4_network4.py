@@ -1,9 +1,9 @@
 import pytest
 
-from pykeadhcp import Kea
-from pykeadhcp.exceptions import KeaSharedNetworkNotFoundException
-from pykeadhcp.models.dhcp4.shared_network import SharedNetwork4
-from pykeadhcp.models.dhcp4.subnet import Subnet4
+from pyisckea import Kea
+from pyisckea.exceptions import KeaSharedNetworkNotFoundException
+from pyisckea.models.dhcp4.shared_network import SharedNetwork4
+from pyisckea.models.dhcp4.subnet import Subnet4
 
 """network4 process:
 get (non-existent network)

@@ -1,7 +1,7 @@
 import json
 
-from pykeadhcp import Kea
-from pykeadhcp.parsers.dhcp4 import Dhcp4Parser
+from pyisckea import Kea
+from pyisckea.parsers.dhcp4 import Dhcp4Parser
 
 
 def test_kea_dhcp4_parser_parse_config(kea_server: Kea):

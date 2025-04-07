@@ -1,6 +1,6 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp4.subnet import Subnet4
-from pykeadhcp.models.generic.option_data import OptionData
+from pyisckea import Kea
+from pyisckea.models.dhcp4.subnet import Subnet4
+from pyisckea.models.generic.option_data import OptionData
 
 """remote-option4-subnet process:
 

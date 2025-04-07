@@ -11,9 +11,9 @@ must be specified and it must not operate in read-only mode
 
 import pytest
 
-from pykeadhcp import Kea
-from pykeadhcp.exceptions import KeaException, KeaReservationNotFoundException
-from pykeadhcp.models.dhcp4.subnet import Subnet4
+from pyisckea import Kea
+from pyisckea.exceptions import KeaException, KeaReservationNotFoundException
+from pyisckea.models.dhcp4.subnet import Subnet4
 
 """reservation process:
 reservation-get non existent

@@ -1,4 +1,4 @@
-from pykeadhcp import Kea
+from pyisckea import Kea
 
 """remote-global-parameter6 process:
 

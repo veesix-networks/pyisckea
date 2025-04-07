@@ -1,4 +1,4 @@
-from pykeadhcp import Kea
+from pyisckea import Kea
 
 """ha process:
 status-get (get HA mode)

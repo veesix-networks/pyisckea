@@ -1,5 +1,5 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.generic.option_data import OptionData
+from pyisckea import Kea
+from pyisckea.models.generic.option_data import OptionData
 
 """remote-option-def4 process:
 

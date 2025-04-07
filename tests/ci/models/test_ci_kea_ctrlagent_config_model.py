@@ -1,5 +1,5 @@
-from pykeadhcp.models.ctrlagent.config import CtrlAgentDaemonConfig
-from pykeadhcp.models.generic.control_socket import ControlSockets
+from pyisckea.models.ctrlagent.config import CtrlAgentDaemonConfig
+from pyisckea.models.generic.control_socket import ControlSockets
 
 
 def test_ci_kea_ctrlagent_config_model_load(ctrlagent_model: CtrlAgentDaemonConfig):

@@ -1,7 +1,7 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp6.subnet import Subnet6
-from pykeadhcp.models.generic.option_data import OptionData
-from pykeadhcp.models.generic.pool import Pool
+from pyisckea import Kea
+from pyisckea.models.dhcp6.subnet import Subnet6
+from pyisckea.models.generic.option_data import OptionData
+from pyisckea.models.generic.pool import Pool
 
 """remote-option6-pool process:
 

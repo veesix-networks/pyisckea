@@ -1,4 +1,4 @@
-from pykeadhcp.models.dhcp6.config import Dhcp6DaemonConfig
+from pyisckea.models.dhcp6.config import Dhcp6DaemonConfig
 
 
 def test_ci_kea_dhcp6_config_model_load(dhcp6_model: Dhcp6DaemonConfig):
