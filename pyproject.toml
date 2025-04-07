@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pykeadhcp"
+name = "pyisckea"
 version = "0.9.0.alpha-1"
 description = "Wrapper around requests module to query ISC Kea DHCP API Daemons (ctrlagent, dhcp4, dhcp6, ddns)"
 authors = ["Brandon Spendlove <brandon-spendlove@hotmail.co.uk>"]
