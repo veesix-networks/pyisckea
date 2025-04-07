@@ -30,7 +30,7 @@ def test_kea_dhcp4_remote_subnet4_add_subnet(kea_server: Kea):
 
 
 def test_kea_dhcp4_remote_subnet4_list(kea_server: Kea):
-    subnets = kea_server.dhcp4.remote_subnet4_list(server_tags=["pykeadhcp-1"])
+    subnets = kea_server.dhcp4.remote_subnet4_list(server_tags=["pyisckea-1"])
     assert subnets
     assert len(subnets) > 0
 

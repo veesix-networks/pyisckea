@@ -17,13 +17,13 @@ del (non-existent)
 
 
 def test_kea_dhcp6_remote_network6_get_non_existent(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     with pytest.raises(KeaSharedNetworkNotFoundException):
         kea_server.dhcp6.remote_network6_get(name=name)
 
 
 def test_kea_dhcp6_remote_network6_add(kea_server: Kea, db_remote_map: dict):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     data = SharedNetwork6(name=name)
     shared_networks = [data]
     response = kea_server.dhcp6.remote_network6_set(
@@ -36,14 +36,14 @@ def test_kea_dhcp6_remote_network6_add(kea_server: Kea, db_remote_map: dict):
 
 def test_kea_dhcp6_remote_network6_list(kea_server: Kea, db_remote_map: dict):
     shared_networks = kea_server.dhcp6.remote_network6_list(
-        server_tags=["pykeadhcp-1"], remote_map=db_remote_map
+        server_tags=["pyisckea-1"], remote_map=db_remote_map
     )
     assert shared_networks
     assert len(shared_networks) > 0
 
 
 def test_kea_dhcp6_remote_network6_get(kea_server: Kea, db_remote_map: dict):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     shared_network = kea_server.dhcp6.remote_network6_get(
         name=name, remote_map=db_remote_map
     )
@@ -52,7 +52,7 @@ def test_kea_dhcp6_remote_network6_get(kea_server: Kea, db_remote_map: dict):
 
 
 def test_kea_dhcp6_remote_subnet6_add_subnet(kea_server: Kea, db_remote_map: dict):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
 
     # Create Temporary Subnet
     subnet = Subnet6(subnet="2001:db8::32/127", id=40123, shared_network_name=name)
@@ -75,7 +75,7 @@ def test_kea_dhcp6_remote_subnet6_del_by_id(kea_server: Kea, db_remote_map: dict
 
 def test_kea_dhcp6_remote_network6_del(kea_server: Kea, db_remote_map: dict):
     response = kea_server.dhcp6.remote_network6_del(
-        name="pykeadhcp-pytest", keep_subnets=False, remote_map=db_remote_map
+        name="pyisckea-pytest", keep_subnets=False, remote_map=db_remote_map
     )
     assert response.result == 0
     assert response.arguments.get("count") == 1
@@ -85,7 +85,7 @@ def test_kea_dhcp6_remote_network6_del_non_existent(
     kea_server: Kea, db_remote_map: dict
 ):
     response = kea_server.dhcp6.remote_network6_del(
-        name="pykeadhcp-pytest", remote_map=db_remote_map
+        name="pyisckea-pytest", remote_map=db_remote_map
     )
     assert response.result == 3
     assert response.arguments["count"] == 0

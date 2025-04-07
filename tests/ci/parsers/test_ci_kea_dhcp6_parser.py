@@ -18,23 +18,23 @@ def test_kea_dhcp6_parser_load(dhcp6_parser: Dhcp6Parser):
 
 
 def test_kea_dhcp6_parser_add_shared_network(dhcp6_parser: Dhcp6Parser):
-    dhcp6_parser.add_shared_network(name="pykeadhcp-dhcp6-parser")
+    dhcp6_parser.add_shared_network(name="pyisckea-dhcp6-parser")
     assert len(dhcp6_parser.config.shared_networks) > 0
 
 
 def test_kea_dhcp6_parser_add_shared_network_existing(dhcp6_parser: Dhcp6Parser):
     with pytest.raises(ParserSharedNetworkAlreadyExistError):
-        dhcp6_parser.add_shared_network(name="pykeadhcp-dhcp6-parser")
+        dhcp6_parser.add_shared_network(name="pyisckea-dhcp6-parser")
 
 
 def test_kea_dhcp6_parser_get_shared_network(dhcp6_parser: Dhcp6Parser):
-    shared_network = dhcp6_parser.get_shared_network(name="pykeadhcp-dhcp6-parser")
+    shared_network = dhcp6_parser.get_shared_network(name="pyisckea-dhcp6-parser")
     assert shared_network
 
 
 def test_kea_dhcp6_parser_add_shared_network_option(dhcp6_parser: Dhcp6Parser):
     shared_network = dhcp6_parser.add_dhcp_option_to_shared_network(
-        name="pykeadhcp-dhcp6-parser", code=15, data="pykeadhcp.local"
+        name="pyisckea-dhcp6-parser", code=15, data="pyisckea.local"
     )
     assert len(shared_network.option_data) > 0
 
@@ -97,10 +97,10 @@ def test_kea_dhcp6_parser_add_subnet_reservation(dhcp6_parser: Dhcp6Parser):
         id=40123,
         ip_address="2001:db8::123",
         hw_address="aa:bb:cc:dd:ee:ff",
-        client_id="pykeadhcp-client-id",
-        circuit_id="pykeadhcp-circuit-id",
-        flex_id="pykeadhcp-flex-id",
-        duid="pykeadhcp-duid",
+        client_id="pyisckea-client-id",
+        circuit_id="pyisckea-circuit-id",
+        flex_id="pyisckea-flex-id",
+        duid="pyisckea-duid",
     )
 
     subnet = dhcp6_parser.get_subnet(id=40123)
@@ -133,7 +133,7 @@ def test_kea_dhcp6_parser_get_resrvation_by_hw_address(dhcp6_parser: Dhcp6Parser
 
 
 def test_kea_dhcp6_parser_get_reservation_by_flex_id(dhcp6_parser: Dhcp6Parser):
-    reservation = dhcp6_parser.get_reservation_by_flex_id(flex_id="pykeadhcp-flex-id")
+    reservation = dhcp6_parser.get_reservation_by_flex_id(flex_id="pyisckea-flex-id")
     assert reservation
     assert "2001:db8::123" in reservation.ip_addresses
 
@@ -206,7 +206,7 @@ def test_kea_dhcp6_parser_subnet_get_subnet_from_default_gateway(
 
 def test_kea_dhcp6_parser_add_subnet_to_shared_network(dhcp6_parser: Dhcp6Parser):
     shared_network = dhcp6_parser.add_subnet_to_shared_network(
-        id=40123, name="pykeadhcp-dhcp6-parser"
+        id=40123, name="pyisckea-dhcp6-parser"
     )
 
     assert len(shared_network.subnet) > 0
@@ -214,13 +214,13 @@ def test_kea_dhcp6_parser_add_subnet_to_shared_network(dhcp6_parser: Dhcp6Parser
 
 def test_kea_dhcp6_parser_remove_subnet_from_shared_network(dhcp6_parser: Dhcp6Parser):
     dhcp6_parser.remove_subnet_from_shared_network(
-        id=40123, name="pykeadhcp-dhcp6-parser"
+        id=40123, name="pyisckea-dhcp6-parser"
     )
-    shared_network = dhcp6_parser.get_shared_network(name="pykeadhcp-dhcp6-parser")
+    shared_network = dhcp6_parser.get_shared_network(name="pyisckea-dhcp6-parser")
     assert len(shared_network.subnet6) == 0
 
 
 def test_kea_dhcp6_parser_remove_shared_network(dhcp6_parser: Dhcp6Parser):
-    dhcp6_parser.remove_shared_network(name="pykeadhcp-dhcp6-parser")
-    shared_network = dhcp6_parser.get_shared_network(name="pykeadhcp-dhcp6-parser")
+    dhcp6_parser.remove_shared_network(name="pyisckea-dhcp6-parser")
+    shared_network = dhcp6_parser.get_shared_network(name="pyisckea-dhcp6-parser")
     assert shared_network is None

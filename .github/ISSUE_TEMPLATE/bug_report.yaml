@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-description: Report a bug that is currently in the latest pykeadhcp release
+description: Report a bug that is currently in the latest pyisckea release
 labels: ["type: bug"]
 body:
   - type: dropdown
@@ -18,8 +18,8 @@ body:
       label: How to reproduce this locally
       description: >
         Please note here the exact steps you take so that other people can reproduce the same bug and
-        attempt to fix the issue. Ensure you are using the latest release of pykeadhcp and that you are
-        not using any other modules that enhance pykeadhcp itself.
+        attempt to fix the issue. Ensure you are using the latest release of pyisckea and that you are
+        not using any other modules that enhance pyisckea itself.
       placeholder: |
         1. Setup Kea class
         2. call dhcp4.subnet4_list()

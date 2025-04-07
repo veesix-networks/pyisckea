@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-description: Suggest a new feature or enhancement for pykeadhcp
+description: Suggest a new feature or enhancement for pyisckea
 labels: ["type: feature"]
 body:
   - type: dropdown
@@ -20,7 +20,7 @@ body:
       label: Feature/Enhancement you are proposing
       description: >
         Describe in detail what feature or enhancement you would like to add to
-        pykeadhcp.
+        pyisckea.
     validations:
       required: true
   - type: textarea

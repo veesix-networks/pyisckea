@@ -4,7 +4,7 @@ class GenericParser:
     premium hooks to expose the different commands like subnet4-add or network4-del then
     the parsers job is to provide similar functionality for the provided daemon configuration
     and then you should use the relevant service `config-set` functionality which is implemented
-    for each service in pykeadhcp.
+    for each service in pyisckea.
 
     The recommended option is to use the functions within the Daemon class (eg. server.dhcp4) and to
     use these parsers as a last resort as tests are not currently performed as extensively vs the API

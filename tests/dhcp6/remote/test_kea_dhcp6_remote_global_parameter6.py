@@ -12,7 +12,7 @@ del
 
 def test_kea_dhcp6_remote_global_parameter6_get_non_existent(kea_server: Kea):
     response = kea_server.dhcp6.remote_global_parameter6_get(
-        parameter="t1-percent", server_tag="pykeadhcp-1"
+        parameter="t1-percent", server_tag="pyisckea-1"
     )
     assert response.result == 3
     assert response.arguments.get("count") == 0

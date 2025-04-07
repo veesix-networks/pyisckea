@@ -12,7 +12,7 @@ del
 
 def test_kea_dhcp4_remote_global_parameter4_get_non_existent(kea_server: Kea):
     response = kea_server.dhcp4.remote_global_parameter4_get(
-        parameter="boot-file-name", server_tag="pykeadhcp-1"
+        parameter="boot-file-name", server_tag="pyisckea-1"
     )
     assert response.result == 3
     assert response.arguments.get("count") == 0

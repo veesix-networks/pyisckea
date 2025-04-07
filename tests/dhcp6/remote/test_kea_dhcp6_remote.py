@@ -18,16 +18,16 @@ def test_kea_dhcp6_remote_prepare(kea_server: Kea):
 
 def test_kea_dhcp6_remote_server6_set(kea_server: Kea):
     response = kea_server.dhcp6.remote_server6_set(
-        servers=[RemoteServer(server_tag="pykeadhcp", description="pykeadhcp-test")]
+        servers=[RemoteServer(server_tag="pyisckea", description="pyisckea-test")]
     )
     assert response.result == 0
 
 
 def test_kea_dhcp6_remote_server6_get(kea_server: Kea):
-    server = kea_server.dhcp6.remote_server6_get(server_tag="pykeadhcp")
+    server = kea_server.dhcp6.remote_server6_get(server_tag="pyisckea")
     assert server
-    assert server.server_tag == "pykeadhcp"
-    assert server.description == "pykeadhcp-test"
+    assert server.server_tag == "pyisckea"
+    assert server.description == "pyisckea-test"
 
 
 def test_kea_dhcp6_remote_server6_get_all(kea_server: Kea, db_remote_map: dict):
@@ -37,6 +37,6 @@ def test_kea_dhcp6_remote_server6_get_all(kea_server: Kea, db_remote_map: dict):
 
 
 def test_kea_dhcp6_remote_server6_del(kea_server: Kea):
-    response = kea_server.dhcp6.remote_server6_del(servers=["pykeadhcp"])
+    response = kea_server.dhcp6.remote_server6_del(servers=["pyisckea"])
     assert response.result == 0
     assert "deleted" in response.text

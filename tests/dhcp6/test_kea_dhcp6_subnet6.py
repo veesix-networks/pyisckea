@@ -48,7 +48,7 @@ def test_kea_dhcp6_subnet6_get(kea_server: Kea):
 
 
 def test_kea_dhcp6_subnet6_delta_update(kea_server: Kea):
-    data = Subnet6(id=40123, subnet="2001:db8::/64", comment="pykeadhcp-test")
+    data = Subnet6(id=40123, subnet="2001:db8::/64", comment="pyisckea-test")
     subnets = [data]
 
     response = kea_server.dhcp6.subnet6_delta_add(subnets=subnets)
@@ -56,7 +56,7 @@ def test_kea_dhcp6_subnet6_delta_update(kea_server: Kea):
 
 
 def test_kea_dhcp6_subnet6_delta_del(kea_server: Kea):
-    data = Subnet6(id=40123, subnet="2001:db8::/64", comment="pykeadhcp-test")
+    data = Subnet6(id=40123, subnet="2001:db8::/64", comment="pyisckea-test")
     subnets = [data]
     response = kea_server.dhcp6.subnet6_delta_del(subnets=subnets)
     assert response.result == 0

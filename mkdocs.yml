@@ -1,7 +1,7 @@
-site_name: veesix ::networks - pykeadhcp
-site_url: https://docs.pykeadhcp.veesix-networks.co.uk
-repo_url: https://github.com/veesix-networks/pykeadhcp
-repo_name: veesix-networks/pykeadhcp
+site_name: veesix ::networks - pyisckea
+site_url: https://docs.pyisckea.veesix-networks.co.uk
+repo_url: https://github.com/veesix-networks/pyisckea
+repo_name: veesix-networks/pyisckea
 logo: docs/img/logo.png
 theme:
   name: material

@@ -19,13 +19,13 @@ del
 
 
 def test_kea_dhcp6_network6_get_non_existent(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     with pytest.raises(KeaSharedNetworkNotFoundException):
         kea_server.dhcp6.network6_get(name=name)
 
 
 def test_kea_dhcp6_network6_add(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     data = SharedNetwork6(name=name)
     shared_networks = [data]
     response = kea_server.dhcp6.network6_add(shared_networks=shared_networks)
@@ -33,7 +33,7 @@ def test_kea_dhcp6_network6_add(kea_server: Kea):
 
 
 def test_kea_dhcp6_network6_add_duplicate(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     data = SharedNetwork6(name=name)
     shared_networks = [data]
     response = kea_server.dhcp6.network6_add(shared_networks)
@@ -41,7 +41,7 @@ def test_kea_dhcp6_network6_add_duplicate(kea_server: Kea):
 
 
 def test_kea_dhcp6_network6_get(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     response = kea_server.dhcp6.network6_get(name=name)
     assert response
     assert response.name == name
@@ -54,7 +54,7 @@ def test_kea_dhcp6_network6_list(kea_server: Kea):
 
 
 def test_kea_dhcp6_network6_subnet_add(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
 
     # Create Temporary Subnet
     data = Subnet6(subnet="2001:db8::/64", id=40123)
@@ -73,7 +73,7 @@ def test_kea_dhcp6_network6_subnet_add(kea_server: Kea):
 
 
 def test_kea_dhcp6_network6_subnet_del(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
 
     # Delete temporary subnet assosication
     response = kea_server.dhcp6.network6_subnet_del(name=name, subnet_id=40123)
@@ -90,6 +90,6 @@ def test_kea_dhcp6_network6_subnet_del(kea_server: Kea):
 
 
 def test_kea_dhcp6_network6_del(kea_server: Kea):
-    name = "pykeadhcp-pytest"
+    name = "pyisckea-pytest"
     response = kea_server.dhcp6.network6_del(name=name)
     assert response.result == 0
