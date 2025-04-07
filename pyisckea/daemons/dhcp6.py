@@ -105,9 +105,7 @@ class Dhcp6:
         if data.result == 3:
             return []
 
-        return [
-            Reservation6.model_validate(reservation) for reservation in data.arguments
-        ]
+        return [Reservation6.parse_obj(reservation) for reservation in data.arguments]
 
     def cache_get_by_id(
         self, identifier_type: HostReservationIdentifierEnum, identifier: str
@@ -136,9 +134,7 @@ class Dhcp6:
         if data.result == 3:
             return []
 
-        return [
-            Reservation6.model_validate(reservation) for reservation in data.arguments
-        ]
+        return [Reservation6.parse_obj(reservation) for reservation in data.arguments]
 
     def cache_insert(self, subnet_id: int, reservation: Reservation6) -> KeaResponse:
         """Manually insert a host into the cache
@@ -155,7 +151,7 @@ class Dhcp6:
             arguments={
                 "subnet-id4": 0,
                 "subnet-id6": subnet_id,
-                **reservation.model_dump(
+                **reservation.dict(
                     exclude_none=True, exclude_unset=True, by_alias=True
                 ),
             },

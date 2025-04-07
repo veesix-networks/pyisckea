@@ -105,9 +105,7 @@ class Dhcp4:
         if data.result == 3:
             return []
 
-        return [
-            Reservation4.model_validate(reservation) for reservation in data.arguments
-        ]
+        return [Reservation4.parse_obj(reservation) for reservation in data.arguments]
 
     def cache_get_by_id(
         self, identifier_type: HostReservationIdentifierEnum, identifier: str
@@ -136,9 +134,7 @@ class Dhcp4:
         if data.result == 3:
             return []
 
-        return [
-            Reservation4.model_validate(reservation) for reservation in data.arguments
-        ]
+        return [Reservation4.parse_obj(reservation) for reservation in data.arguments]
 
     def cache_insert(self, subnet_id: int, reservation: Reservation4) -> KeaResponse:
         """Manually insert a host into the cache
@@ -155,7 +151,7 @@ class Dhcp4:
             arguments={
                 "subnet-id4": subnet_id,
                 "subnet-id6": 0,
-                **reservation.model_dump(
+                **reservation.dict(
                     exclude_none=True, exclude_unset=True, by_alias=True
                 ),
             },
@@ -423,26 +419,8 @@ class Dhcp4:
         return self.api.send_command(
             command="ha-continue", service=self.service, required_hook="ha"
         )
-        """Resumes operation of a paused HA state machine.
-
-        Kea API Reference:
-            https://kea.readthedocs.io/en/latest/api.html#ha-continue
-        """
-        return self.api.send_command(
-            command="ha-continue", service=self.service, required_hook="ha"
-        )
 
     def ha_heartbeat(self) -> KeaResponse:
-        """Manually verify the HA state of local and remote servers.
-
-        Kea API Reference:
-            https://kea.readthedocs.io/en/latest/api.html#ha-heartbeat
-        """
-        return self.api.send_command(
-            command="ha-heartbeat",
-            service=self.service,
-            required_hook="ha",
-        )
         """Manually verify the HA state of local and remote servers.
 
         Kea API Reference:
@@ -482,14 +460,6 @@ class Dhcp4:
         )
 
     def ha_maintenance_start(self) -> KeaResponse:
-        """Instruct the server to transition to the 'partner-in-maintenance' state
-
-        Kea API Reference:
-            https://kea.readthedocs.io/en/latest/api.html#ha-maintenance-start
-        """
-        return self.api.send_command(
-            command="ha-maintenance-start", service=self.service, required_hook="ha"
-        )
         """Instruct the server to transition to the 'partner-in-maintenance' state
 
         Kea API Reference:

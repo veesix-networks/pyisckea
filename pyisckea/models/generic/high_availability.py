@@ -1,7 +1,6 @@
 from typing import List, Union
-
-from pyisckea.models.enums import HAModeTypeEnum, HARoleTypeEnum, HAStateTypeEnum
 from pyisckea.models.generic.base import KeaBaseModel
+from pyisckea.models.enums import HAModeTypeEnum, HARoleTypeEnum, HAStateTypeEnum
 
 
 class HAServerLocal(KeaBaseModel):
@@ -14,7 +13,7 @@ class HAServerRemote(KeaBaseModel):
     age: int
     in_touch: bool
     last_scopes: List[str]
-    last_state: Union[None, HAStateTypeEnum] = None
+    last_state: Union[None, HAStateTypeEnum]
     role: HARoleTypeEnum
 
 
