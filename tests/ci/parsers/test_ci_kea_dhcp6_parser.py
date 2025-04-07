@@ -1,7 +1,7 @@
 import pytest
 
-from pykeadhcp.parsers.dhcp6 import Dhcp6Parser
-from pykeadhcp.parsers.exceptions import (
+from pyisckea.parsers.dhcp6 import Dhcp6Parser
+from pyisckea.parsers.exceptions import (
     ParserPDPoolAlreadyExistError,
     ParserPDPoolNotFoundError,
     ParserPoolAddressNotInSubnetError,

@@ -1,5 +1,5 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp6.reservation import Reservation6
+from pyisckea import Kea
+from pyisckea.models.dhcp6.reservation import Reservation6
 
 """cache process:Reservation6
 cache get (none)

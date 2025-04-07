@@ -1,7 +1,7 @@
 import json
 
-from pykeadhcp import Kea
-from pykeadhcp.parsers.dhcp6 import Dhcp6Parser
+from pyisckea import Kea
+from pyisckea.parsers.dhcp6 import Dhcp6Parser
 
 
 def test_kea_dhcp6_parser_parse_config(kea_server: Kea):

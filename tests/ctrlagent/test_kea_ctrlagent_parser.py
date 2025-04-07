@@ -1,7 +1,7 @@
 import json
 
-from pykeadhcp import Kea
-from pykeadhcp.parsers.ctrlagent import CtrlAgentParser
+from pyisckea import Kea
+from pyisckea.parsers.ctrlagent import CtrlAgentParser
 
 
 def test_kea_ctrlagent_parser_parse_config(kea_server: Kea):

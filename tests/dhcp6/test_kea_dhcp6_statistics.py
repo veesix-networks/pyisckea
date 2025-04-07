@@ -1,4 +1,4 @@
-from pykeadhcp import Kea
+from pyisckea import Kea
 
 
 def test_kea_dhcp6_statistic_get_all(kea_server: Kea):

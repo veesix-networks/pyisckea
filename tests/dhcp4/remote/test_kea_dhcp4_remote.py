@@ -1,5 +1,5 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.generic.remote_server import RemoteServer
+from pyisckea import Kea
+from pyisckea.models.generic.remote_server import RemoteServer
 
 """remote generic process:
 remote-prepare (config backend pull test)

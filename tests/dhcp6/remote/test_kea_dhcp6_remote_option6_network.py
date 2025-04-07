@@ -1,6 +1,6 @@
-from pykeadhcp import Kea
-from pykeadhcp.models.dhcp6.shared_network import SharedNetwork6
-from pykeadhcp.models.generic.option_data import OptionData
+from pyisckea import Kea
+from pyisckea.models.dhcp6.shared_network import SharedNetwork6
+from pyisckea.models.generic.option_data import OptionData
 
 """remote-option6-network process:
 

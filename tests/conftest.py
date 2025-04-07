@@ -5,11 +5,11 @@ from httpx import BasicAuth
 import pytest
 from pytest import FixtureRequest
 
-from pykeadhcp import Kea
-from pykeadhcp.models.ctrlagent.config import CtrlAgentDaemonConfig
-from pykeadhcp.models.dhcp4.config import Dhcp4DaemonConfig
-from pykeadhcp.models.dhcp6.config import Dhcp6DaemonConfig
-from pykeadhcp.parsers import CtrlAgentParser, Dhcp4Parser, Dhcp6Parser
+from pyisckea import Kea
+from pyisckea.models.ctrlagent.config import CtrlAgentDaemonConfig
+from pyisckea.models.dhcp4.config import Dhcp4DaemonConfig
+from pyisckea.models.dhcp6.config import Dhcp6DaemonConfig
+from pyisckea.parsers import CtrlAgentParser, Dhcp4Parser, Dhcp6Parser
 
 
 def pytest_addoption(parser):
