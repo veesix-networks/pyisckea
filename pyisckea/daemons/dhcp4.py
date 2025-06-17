@@ -1983,7 +1983,7 @@ class Dhcp4:
 
         return Reservation4.model_validate(data.arguments)
 
-    def reservation_get_all(self, subnet_id: int) -> KeaResponse:
+    def reservation_get_all(self, subnet_id: int) -> list[Reservation4]:
         """Gets all host reservations for a given subnet id
 
         Args:
